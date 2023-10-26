@@ -1,0 +1,23 @@
+VertexLitGeneric
+{
+	"$bumpmap" "models\cpthazama\l4d2\common\ci_normal"
+	"$halflambert" "1"
+
+	"$selfillum" "1"
+	"$selfillummask" "models\cpthazama\l4d2\common\cim_glowing_eyes"
+
+	"$phong" "1"
+	"$phongboost" "0.3"
+	"$phongexponent" "10"
+	"$phongtint" "[.62 .72 1]"
+	"$phongfresnelranges" "[0.75 0.25 1]"
+
+	"$rimlight" "1"
+	"$rimlightexponent" "10"
+	"$rimlightboost" "0.3"
+
+	"$detail" "models\cpthazama\l4d2\common\detail/ci_detail_dirt"
+	"$detailframe" "0"
+	"$detailscale" "1"
+	"$detailblendfactor" "0"
+}

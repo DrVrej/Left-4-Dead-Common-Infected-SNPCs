@@ -1,0 +1,9 @@
+patch
+{
+include "materials/models\cpthazama\l4d2\common\ci_head_include_clown.vmt"
+insert
+{
+$basetexture "models\cpthazama\l4d2\common\cim_head_clown"
+$WOUNDED 1
+}
+}

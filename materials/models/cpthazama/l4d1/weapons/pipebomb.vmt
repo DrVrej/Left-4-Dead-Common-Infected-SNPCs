@@ -1,0 +1,13 @@
+VertexLitGeneric
+{
+	$baseTexture "models\cpthazama\l4d1\weapons\pipebomb"
+	$bumpmap "effects/flat_normal"
+	$basemapalphaphongmask 1
+
+	$phongboost "0.2"
+	$phongexponent 15
+	$phongfresnelranges "[10 10 40]"
+	$ambientocclusion 1
+
+	$phong 1
+}

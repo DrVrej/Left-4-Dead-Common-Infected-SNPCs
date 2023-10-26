@@ -1,0 +1,10 @@
+Cable
+{
+$basetexture "vj_l4d/Smoker_Tongue_Beam"
+$bumpmap "cable/cablenormalmap"
+
+$translucent 1
+$vertexcolor 1
+$nocull 1
+$spriteorientation parallel_upright
+}

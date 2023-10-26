@@ -1,0 +1,11 @@
+VertexlitGeneric
+{
+$basetexture "models\cpthazama\l4d2\common\cim_ceda_faceplate"
+$additive 1
+$ENVMAPMASK "models\cpthazama\l4d2\common\cim_ceda_faceplate_envmapmask"
+$envmap env_cubemap
+$envmapfresnel 1
+$ENVMAPFRESNELMINMAXEXP "[.05 .7 .7]"
+$allowdiffusemodulation 0
+$nocull 1
+}

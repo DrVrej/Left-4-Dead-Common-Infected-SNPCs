@@ -1,0 +1,12 @@
+vertexlitgeneric
+{
+$shinyblood 1
+$shinybloodexponent 8
+$halflambert 1
+$bumpmap "effects/flat_normal"
+"$phong" 1
+"$phongboost" ".2"
+"$phongexponent" "10"
+"$phongfresnelranges" "[.1 .1 1]"
+$allowdiffusemodulation 1
+}
