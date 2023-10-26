@@ -236,14 +236,14 @@ function ENT:FindSpawnPosition(getClosest,findHidden)
 	local navareas = self.navAreas
 	local useNav = (#nodes <= 0 && #navareas > 0) or (#navareas > 0 && #nodes > 0 && math.random(1,2) == 1) or false
 	local pos = false
-	
-	if useNav then
-		local getHidden = findHidden or math.random(1,3) == 1
-		local testEnt = self:GetRandomSurvivor()
-		pos = getClosest && self:GetClosestNavPosition(testEnt,getHidden) or getHidden && self:FindHiddenNavPoint(testEnt) or self:FindRandomNavPoint(testEnt)
-	else
-		local testEnt = self:GetRandomSurvivor()
-		pos = getClosest && self:GetClosestNodePosition(testEnt) or self:FindRandomNodePosition(testEnt)
+	local testEnt = self:GetRandomSurvivor()
+	if IsValid(testEnt) then
+		if useNav then
+			local getHidden = findHidden or math.random(1,3) == 1
+			pos = getClosest && self:GetClosestNavPosition(testEnt,getHidden) or getHidden && self:FindHiddenNavPoint(testEnt) or self:FindRandomNavPoint(testEnt)
+		else
+			pos = getClosest && self:GetClosestNodePosition(testEnt) or self:FindRandomNodePosition(testEnt)
+		end
 	end
 	return pos
 end

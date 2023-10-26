@@ -22,20 +22,20 @@ if !SERVER then return end
 ENT.SingleSpawner = true -- If set to true, it will spawn the entities once then remove itself
 ENT.EntitiesToSpawn = {
 	{Entities = {
-		"npc_vj_l4d_com_male",
-		"npc_vj_l4d_com_female",
-		"npc_vj_l4d_com_f_nurse:10",
-		"npc_vj_l4d_com_m_hospital:10",
-		"npc_vj_l4d_com_m_airport:10",
-		"npc_vj_l4d_com_m_police:10",
-		"npc_vj_l4d_com_m_soldier:10",
-		"npc_vj_l4d_com_m_worker:13",
-		"npc_vj_l4d_com_m_mudmen:13",
-		"npc_vj_l4d_com_m_ceda:15",
-		"npc_vj_l4d_com_m_fallsur:15",
-		"npc_vj_l4d_com_m_clown:25",
-		"npc_vj_l4d_com_m_riot:20",
-		"npc_vj_l4d_com_m_jimmy:150"
+			"npc_vj_l4d_com_male",
+			"npc_vj_l4d_com_female",
+			"npc_vj_l4d_com_f_nurse:10",
+			"npc_vj_l4d_com_m_hospital:10",
+			"npc_vj_l4d_com_m_airport:10",
+			"npc_vj_l4d_com_m_police:10",
+			"npc_vj_l4d_com_m_soldier:10",
+			"npc_vj_l4d_com_m_worker:13",
+			"npc_vj_l4d_com_m_mudmen:13",
+			"npc_vj_l4d_com_m_ceda:15",
+			"npc_vj_l4d_com_m_fallsur:15",
+			"npc_vj_l4d_com_m_clown:25",
+			"npc_vj_l4d_com_m_riot:20",
+			"npc_vj_l4d_com_m_jimmy:150"
 		}
 	}
 }
