@@ -48,7 +48,6 @@ SWEP.NextIdle_PrimaryAttack		= 1.3 -- How much time until it plays the idle anim
 	-- Reload Settings ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.AnimTbl_Reload				= {ACT_VM_DRAW}
 SWEP.Reload_TimeUntilAmmoIsSet	= 1 -- Time until ammo is set to the weapon
-SWEP.Reload_TimeUntilFinished	= 1 -- How much time until the player can play idle animation, shoot, etc.
 	-- World Model ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.WorldModel_UseCustomPosition = true -- Should the gun use custom position? This can be used to fix guns that are in the crotch
 SWEP.WorldModel_CustomPositionAngle = Vector(0, 0, 180)
@@ -69,10 +68,10 @@ function SWEP:CustomOnInitialize()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function SWEP:CustomOnPrimaryAttack_BeforeShoot()
-	timer.Simple(1.3,function()
+	if CLIENT then return end
+	timer.Simple(1.3, function()
 		local owner = self:GetOwner()
 		if IsValid(self) && IsValid(owner) && owner:GetActiveWeapon() == self then
-			if CLIENT then return end
 			local pipebomb = ents.Create("obj_vj_l4d_pipebomb")
 			pipebomb:SetPos(owner:GetShootPos())
 			pipebomb:SetAngles(owner:GetAngles())
@@ -82,7 +81,7 @@ function SWEP:CustomOnPrimaryAttack_BeforeShoot()
 
 			local phys = pipebomb:GetPhysicsObject()
 			if phys:IsValid() then
-				phys:ApplyForceCenter(owner:GetAimVector() *5000 +owner:GetUp() *1500)
+				phys:ApplyForceCenter(owner:GetAimVector()*5000 + owner:GetUp()*1500)
 			end
 		end
 	end)

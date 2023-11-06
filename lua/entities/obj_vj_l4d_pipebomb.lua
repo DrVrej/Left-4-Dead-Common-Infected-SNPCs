@@ -17,7 +17,7 @@ ENT.Spawnable = true
 ENT.AdminOnly = false
 
 ENT.VJTag_ID_Prop = true
-ENT.VJTag_ID_Danger = true
+ENT.VJTag_ID_Grenade = true
 
 if CLIENT then
 	local Name = "Pipe Bomb"
@@ -52,11 +52,11 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnInitialize()
 	self:SetHealth(1)
-	for _, x in pairs(ents.FindInSphere(self:GetPos(), 4000)) do
-		if x:IsNPC() && x.IsVJL4DCommonInfected && x.Zombie_CanHearPipe && x.Zombie_NextPipBombT < CurTime() then
-			x.Zombie_NextPipBombT = CurTime() + 6.9
-			x:VJ_DoSetEnemy(self, true)
-			table.insert(self.Zombies, x)
+	for _, v in pairs(ents.FindInSphere(self:GetPos(), 4000)) do
+		if v:IsNPC() && v.IsVJL4DCommonInfected && v.Zombie_CanHearPipe && v.Zombie_NextPipBombT < CurTime() then
+			v.Zombie_NextPipBombT = CurTime() + 6.9
+			v:VJ_DoSetEnemy(self, true)
+			table.insert(self.Zombies, v)
 		end
 	end
 	
@@ -137,10 +137,10 @@ function ENT:Beep(vol)
 	glow:SetParent(self)
 	glow:Spawn()
 	glow:Activate()
-	glow:Fire("SetParentAttachment","pipebomb_light")
+	glow:Fire("SetParentAttachment", "pipebomb_light")
 	self:DeleteOnRemove(glow)
 	
-	timer.Simple(0.2,function()
+	timer.Simple(0.2, function()
 		if IsValid(self) then
 			glow:Remove()
 		end
