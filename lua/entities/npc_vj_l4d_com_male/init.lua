@@ -270,8 +270,8 @@ function ENT:CustomOnThink_AIEnabled()
 						self:SetPos(finalpos)
 					end
 				end)
-				self:VJ_ACT_PLAYACTIVITY(anim,true,false/*self:DecideAnimationLength(anim,false,0.4)*/,true,0,{},function(vsched)
-					vsched.RunCode_OnFinish = function()
+				self:VJ_ACT_PLAYACTIVITY(anim,true,false/*self:DecideAnimationLength(anim,false,0.4)*/,true,0,{},function(sched)
+					sched.RunCode_OnFinish = function()
 						//self:SetGroundEntity(NULL)
 						//self:SetPos(finalpos)
 						self.Zombie_IsClimbing = false
