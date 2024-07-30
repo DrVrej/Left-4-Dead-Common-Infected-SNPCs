@@ -1,5 +1,5 @@
 /*--------------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2024 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 --------------------------------------------------*/
@@ -36,9 +36,9 @@ local entsList = {
 	"npc_vj_l4d_com_m_jimmy:150"
 }
 ENT.EntitiesToSpawn = {
-	{SpawnPosition = {vForward=50, vRight=0, vUp=0}, Entities = entsList},
-	{SpawnPosition = {vForward=0, vRight=100, vUp=0}, Entities = entsList},
-	{SpawnPosition = {vForward=100, vRight=100, vUp=0}, Entities = entsList},
-	{SpawnPosition = {vForward=100, vRight=-100, vUp=0}, Entities = entsList},
-	{SpawnPosition = {vForward=0, vRight=-100, vUp=0}, Entities = entsList},
+	{SpawnPosition = Vector(0, 0, 0), Entities = entsList},
+	{SpawnPosition = Vector(50, 50, 0), Entities = entsList},
+	{SpawnPosition = Vector(50, -50, 0), Entities = entsList},
+	{SpawnPosition = Vector(-50, 50, 0), Entities = entsList},
+	{SpawnPosition = Vector(-50, -50, 0), Entities = entsList},
 }

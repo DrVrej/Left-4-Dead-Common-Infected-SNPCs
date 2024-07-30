@@ -1,5 +1,5 @@
 /*--------------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2024 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 --------------------------------------------------*/
@@ -10,13 +10,13 @@ ENT.Base 			= "obj_vj_projectile_base"
 ENT.PrintName		= "Pipe Bomb"
 ENT.Author 			= "DrVrej"
 ENT.Contact 		= "http://steamcommunity.com/groups/vrejgaming"
-ENT.Information		= "Projectiles for my addons"
+ENT.Information		= "Projectile, usually used for NPCs & Weapons"
 ENT.Category		= "VJ Base"
 
 ENT.Spawnable = true
 ENT.AdminOnly = false
 
-ENT.VJTag_ID_Prop = true
+ENT.VJTag_IsAttackable = true
 ENT.VJTag_ID_Grenade = true
 
 if CLIENT then
@@ -30,7 +30,7 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if !SERVER then return end
 
-ENT.Model = {"models/cpthazama/l4d1/weapons/pipebomb.mdl"} -- The models it should spawn with | Picks a random one from the table
+ENT.Model = "models/cpthazama/l4d1/weapons/pipebomb.mdl" -- The models it should spawn with | Picks a random one from the table
 ENT.MoveCollideType = nil -- Move type | Some examples: MOVECOLLIDE_FLY_BOUNCE, MOVECOLLIDE_FLY_SLIDE
 ENT.CollisionGroupType = nil -- Collision type, recommended to keep it as it is
 ENT.SolidType = SOLID_VPHYSICS -- Solid type, recommended to keep it as it is
@@ -62,59 +62,62 @@ function ENT:CustomOnInitialize()
 	
 	-- Explosion sequence (Manual)
 	timer.Simple(self.FuseTime,function() if IsValid(self) then self:DeathEffects() end end)
-	timer.Simple(0,function() if IsValid(self) then self:Beep(75) end end)
-	timer.Simple(1,function() if IsValid(self) then self:Beep(75) end end)
-	timer.Simple(2,function() if IsValid(self) then self:Beep(75) end end)
-	timer.Simple(3,function() if IsValid(self) then self:Beep(75) end end)
-	timer.Simple(3.5,function() if IsValid(self) then self:Beep(75) end end)
-	timer.Simple(4,function() if IsValid(self) then self:Beep(75) end end)
-	timer.Simple(4.4,function() if IsValid(self) then self:Beep(75) end end)
-	timer.Simple(4.8,function() if IsValid(self) then self:Beep(78) end end)
-	timer.Simple(5.2,function() if IsValid(self) then self:Beep(80) end end)
-	timer.Simple(5.6,function() if IsValid(self) then self:Beep(80) end end)
-	timer.Simple(6,function() if IsValid(self) then self:Beep(84) end end)
-	timer.Simple(6.2,function() if IsValid(self) then self:Beep(84) end end)
-	timer.Simple(6.3,function() if IsValid(self) then self:Beep(84) end end)
-	timer.Simple(6.4,function() if IsValid(self) then self:Beep(84) end end)
-	timer.Simple(6.5,function() if IsValid(self) then self:Beep(84) end end)
-	timer.Simple(6.6,function() if IsValid(self) then self:Beep(88) end end)
-	timer.Simple(6.7,function() if IsValid(self) then self:Beep(90) end end)
-	timer.Simple(6.8,function() if IsValid(self) then self:Beep(90) end end)
-	timer.Simple(6.9,function() if IsValid(self) then self:Beep(90) end end)
+	timer.Simple(0, function() if IsValid(self) then self:Beep(75) end end)
+	timer.Simple(1, function() if IsValid(self) then self:Beep(75) end end)
+	timer.Simple(2, function() if IsValid(self) then self:Beep(75) end end)
+	timer.Simple(3, function() if IsValid(self) then self:Beep(75) end end)
+	timer.Simple(3.5, function() if IsValid(self) then self:Beep(75) end end)
+	timer.Simple(4, function() if IsValid(self) then self:Beep(75) end end)
+	timer.Simple(4.4, function() if IsValid(self) then self:Beep(75) end end)
+	timer.Simple(4.8, function() if IsValid(self) then self:Beep(78) end end)
+	timer.Simple(5.2, function() if IsValid(self) then self:Beep(80) end end)
+	timer.Simple(5.6, function() if IsValid(self) then self:Beep(80) end end)
+	timer.Simple(6, function() if IsValid(self) then self:Beep(84) end end)
+	timer.Simple(6.2, function() if IsValid(self) then self:Beep(84) end end)
+	timer.Simple(6.3, function() if IsValid(self) then self:Beep(84) end end)
+	timer.Simple(6.4, function() if IsValid(self) then self:Beep(84) end end)
+	timer.Simple(6.5, function() if IsValid(self) then self:Beep(84) end end)
+	timer.Simple(6.6, function() if IsValid(self) then self:Beep(88) end end)
+	timer.Simple(6.7, function() if IsValid(self) then self:Beep(90) end end)
+	timer.Simple(6.8, function() if IsValid(self) then self:Beep(90) end end)
+	timer.Simple(6.9, function() if IsValid(self) then self:Beep(90) end end)
 	
-	local glow = ents.Create("env_sprite")
-	glow:SetKeyValue("model","sprites/glow1.vmt")
-	glow:SetKeyValue("scale","0.1")
-	glow:SetKeyValue("rendermode","5")
-	glow:SetKeyValue("rendercolor","255 191 0")
-	glow:SetKeyValue("spawnflags","1")
-	glow:SetPos(self:GetPos())
-	glow:SetParent(self)
-	glow:Spawn()
-	glow:Activate()
-	glow:Fire("SetParentAttachment","fuse")
-	self:DeleteOnRemove(glow)
+	local glowFuse = ents.Create("env_sprite")
+	glowFuse:SetKeyValue("model","sprites/glow1.vmt")
+	glowFuse:SetKeyValue("scale","0.1")
+	glowFuse:SetKeyValue("rendermode","5")
+	glowFuse:SetKeyValue("rendercolor","255 191 0")
+	glowFuse:SetKeyValue("spawnflags","1")
+	glowFuse:SetPos(self:GetPos())
+	glowFuse:SetParent(self)
+	glowFuse:Spawn()
+	glowFuse:Activate()
+	glowFuse:Fire("SetParentAttachment","fuse")
+	self:DeleteOnRemove(glowFuse)
 	
-	glow = ents.Create("env_sprite")
-	glow:SetKeyValue("model","sprites/glow1.vmt")
-	glow:SetKeyValue("scale","0.05")
-	glow:SetKeyValue("rendermode","5")
-	glow:SetKeyValue("rendercolor","255 0 0")
-	glow:SetKeyValue("spawnflags","1")
-	glow:SetPos(self:GetPos())
-	glow:SetParent(self)
-	glow:Spawn()
-	glow:Activate()
-	glow:Fire("SetParentAttachment","pipebomb_light")
-	self:DeleteOnRemove(glow)
+	local redGlow = ents.Create("env_sprite")
+	redGlow:SetKeyValue("model", "sprites/redglow1.vmt")
+	redGlow:SetKeyValue("scale", "0.1")
+	redGlow:SetKeyValue("rendermode", "3") -- kRenderGlow
+	redGlow:SetKeyValue("renderfx", "14") -- kRenderFxNoDissipation
+	redGlow:SetKeyValue("renderamt", "200")
+	redGlow:SetKeyValue("rendercolor", "255 255 255")
+	redGlow:SetKeyValue("GlowProxySize", "4.0")
+	redGlow:SetParent(self)
+	redGlow:Fire("SetParentAttachment", "pipebomb_light")
+	redGlow:Spawn()
+	redGlow:Activate()
+	self:DeleteOnRemove(redGlow)
 	
-	util.SpriteTrail(self, 2, Color(255,0,0,255), false, 15, 0.5, 0.2, 1/(10+1)*0.5, "VJ_Base/sprites/vj_trial1.vmt")
+	local redTrail = util.SpriteTrail(self, 1, Color(255, 0, 0), true, 8, 1, 0.5, 0.0555, "sprites/bluelaser1.vmt")
+	redTrail:SetKeyValue("rendermode", "5") -- kRenderTransAdd
+	redTrail:SetKeyValue("renderfx", "0") -- kRenderFxNone
 	
 	local redLight = ents.Create("light_dynamic")
 	redLight:SetKeyValue("brightness", "0.5")
 	redLight:SetKeyValue("distance", "35")
 	redLight:SetLocalPos(self:GetPos())
-	redLight:SetLocalAngles( self:GetAngles() )
+	redLight:SetLocalAngles(self:GetAngles())
 	redLight:Fire("Color", "255 50 0")
 	redLight:SetParent(self)
 	redLight:Spawn()
@@ -181,10 +184,10 @@ function ENT:DeathEffects()
 	
 	-- Particles & Effects
 	ParticleEffect("vj_explosion2", self:GetPos(), defAng, nil)
-	local effectdata = EffectData()
-	effectdata:SetOrigin(self:GetPos())
-	util.Effect("ThumperDust", effectdata)
-	util.Effect("Explosion", effectdata)
+	local effectData = EffectData()
+	effectData:SetOrigin(self:GetPos())
+	util.Effect("ThumperDust", effectData)
+	util.Effect("Explosion", effectData)
 
 	-- Explosion Light
 	local expLight = ents.Create("light_dynamic")

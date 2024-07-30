@@ -31,7 +31,7 @@ SWEP.Primary.Automatic			= false -- Is it automatic?
 SWEP.Primary.Ammo				= "pipebomb" -- Ammo type
 SWEP.Primary.Sound				= {}
 SWEP.Primary.DistantSound		= {}
-SWEP.AnimTbl_PrimaryFire		= {ACT_VM_PRIMARYATTACK}
+SWEP.AnimTbl_PrimaryFire		= ACT_VM_PRIMARYATTACK
 //SWEP.Primary.DistantSoundVolume	= 0.25 -- Distant sound volume
 SWEP.Primary.DisableBulletCode	= true -- The bullet won't spawn, this can be used when creating a projectile-based weapon
 SWEP.PrimaryEffects_MuzzleFlash = false
@@ -42,11 +42,11 @@ SWEP.Primary.TakeAmmo			= 1
 SWEP.DelayOnDeploy 				= 0.35 -- Time until it can shoot again after deploying the weapon
 	-- Idle Settings ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.HasIdleAnimation			= true -- Does it have a idle animation?
-SWEP.AnimTbl_Idle				= {ACT_VM_IDLE}
+SWEP.AnimTbl_Idle				= ACT_VM_IDLE
 SWEP.NextIdle_Deploy			= 0.35 -- How much time until it plays the idle animation after the weapon gets deployed
 SWEP.NextIdle_PrimaryAttack		= 1.3 -- How much time until it plays the idle animation after attacking(Primary)
 	-- Reload Settings ---------------------------------------------------------------------------------------------------------------------------------------------
-SWEP.AnimTbl_Reload				= {ACT_VM_DRAW}
+SWEP.AnimTbl_Reload				= ACT_VM_DRAW
 SWEP.Reload_TimeUntilAmmoIsSet	= 1 -- Time until ammo is set to the weapon
 	-- World Model ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.WorldModel_UseCustomPosition = true -- Should the gun use custom position? This can be used to fix guns that are in the crotch
@@ -72,16 +72,17 @@ function SWEP:CustomOnPrimaryAttack_BeforeShoot()
 	timer.Simple(1.3, function()
 		local owner = self:GetOwner()
 		if IsValid(self) && IsValid(owner) && owner:GetActiveWeapon() == self then
-			local pipebomb = ents.Create("obj_vj_l4d_pipebomb")
-			pipebomb:SetPos(owner:GetShootPos())
-			pipebomb:SetAngles(owner:GetAngles())
-			pipebomb:SetOwner(owner)
-			pipebomb:Activate()
-			pipebomb:Spawn()
+			local pipeBomb = ents.Create("obj_vj_l4d_pipebomb")
+			pipeBomb:SetPos(owner:GetShootPos())
+			pipeBomb:SetAngles(owner:GetAngles())
+			pipeBomb:SetOwner(owner)
+			pipeBomb:Activate()
+			pipeBomb:Spawn()
 
-			local phys = pipebomb:GetPhysicsObject()
+			local phys = pipeBomb:GetPhysicsObject()
 			if phys:IsValid() then
 				phys:ApplyForceCenter(owner:GetAimVector()*5000 + owner:GetUp()*1500)
+				phys:SetAngleVelocity(Vector(math.Rand(-160, 160), math.Rand(-160, 160), math.Rand(-160, 160)))
 			end
 		end
 	end)

@@ -1,6 +1,6 @@
-ENT.Base 			= "npc_vj_l4d_com_male"
+ENT.Base 			= "npc_vj_creature_base"
 ENT.Type 			= "ai"
-ENT.PrintName 		= "Uncommon Infected (CEDA)"
+ENT.PrintName 		= "CEDA Worker Infected"
 ENT.Author 			= "DrVrej"
 ENT.Contact 		= "http://steamcommunity.com/groups/vrejgaming"
 ENT.Purpose 		= "Spawn it and fight with it!"

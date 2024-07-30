@@ -1,6 +1,6 @@
-ENT.Base 			= "npc_vj_l4d_com_female"
+ENT.Base 			= "npc_vj_creature_base"
 ENT.Type 			= "ai"
-ENT.PrintName 		= "Common Infected (Nurse)"
+ENT.PrintName 		= "Nurse Infected"
 ENT.Author 			= "DrVrej"
 ENT.Contact 		= "http://steamcommunity.com/groups/vrejgaming"
 ENT.Purpose 		= "Spawn it and fight with it!"

@@ -1,6 +1,6 @@
 /*--------------------------------------------------
 	=============== Autorun File ===============
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2024 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 --------------------------------------------------*/
@@ -10,39 +10,39 @@ local AddonType = "NPC"
 -------------------------------------------------------
 local VJExists = file.Exists("lua/autorun/vj_base_autorun.lua", "GAME")
 if VJExists == true then
-	include('autorun/vj_controls.lua')
+	include("autorun/vj_controls.lua")
 
 	local spawnCategory = "Left 4 Dead"
 	
 	-- Male
-	VJ.AddNPC("Common Infected (Male)","npc_vj_l4d_com_male",spawnCategory)
-	VJ.AddNPC("Common Infected (Soldier)","npc_vj_l4d_com_m_soldier",spawnCategory)
-	VJ.AddNPC("Common Infected (Police)","npc_vj_l4d_com_m_police",spawnCategory)
-	VJ.AddNPC("Common Infected (Hospital)","npc_vj_l4d_com_m_hospital",spawnCategory)
-	VJ.AddNPC("Common Infected (Airport)","npc_vj_l4d_com_m_airport",spawnCategory)
+	VJ.AddNPC("Male Infected", "npc_vj_l4d_com_male", spawnCategory)
+	VJ.AddNPC("Soldier Infected", "npc_vj_l4d_com_m_soldier", spawnCategory)
+	VJ.AddNPC("Police Infected", "npc_vj_l4d_com_m_police", spawnCategory)
+	VJ.AddNPC("Hospital Infected", "npc_vj_l4d_com_m_hospital", spawnCategory)
+	VJ.AddNPC("Airport Infected", "npc_vj_l4d_com_m_airport", spawnCategory)
 		-- Uncommon
-		VJ.AddNPC("Uncommon Infected (CEDA)","npc_vj_l4d_com_m_ceda",spawnCategory)
-		VJ.AddNPC("Uncommon Infected (Jimmy)","npc_vj_l4d_com_m_jimmy",spawnCategory)
-		VJ.AddNPC("Uncommon Infected (Fallen Survivor)","npc_vj_l4d_com_m_fallsur",spawnCategory)
-		VJ.AddNPC("Uncommon Infected (Clown)","npc_vj_l4d_com_m_clown",spawnCategory)
-		VJ.AddNPC("Uncommon Infected (Mud Men)","npc_vj_l4d_com_m_mudmen",spawnCategory)
-		VJ.AddNPC("Uncommon Infected (Worker)","npc_vj_l4d_com_m_worker",spawnCategory)
-		VJ.AddNPC("Uncommon Infected (Riot)","npc_vj_l4d_com_m_riot",spawnCategory)
+		VJ.AddNPC("CEDA Worker Infected", "npc_vj_l4d_com_m_ceda", spawnCategory)
+		VJ.AddNPC("Jimmy Gibbs Junior", "npc_vj_l4d_com_m_jimmy", spawnCategory)
+		VJ.AddNPC("Fallen Survivor Infected", "npc_vj_l4d_com_m_fallsur", spawnCategory)
+		VJ.AddNPC("Clown Infected", "npc_vj_l4d_com_m_clown", spawnCategory)
+		VJ.AddNPC("Mud Man Infected", "npc_vj_l4d_com_m_mudmen", spawnCategory)
+		VJ.AddNPC("Worker Infected", "npc_vj_l4d_com_m_worker", spawnCategory)
+		VJ.AddNPC("Riot Infected", "npc_vj_l4d_com_m_riot", spawnCategory)
 	
 	-- Female
-	VJ.AddNPC("Common Infected (Female)","npc_vj_l4d_com_female",spawnCategory)
-	VJ.AddNPC("Common Infected (Nurse)","npc_vj_l4d_com_f_nurse",spawnCategory)
+	VJ.AddNPC("Female Infected", "npc_vj_l4d_com_female", spawnCategory)
+	VJ.AddNPC("Nurse Infected", "npc_vj_l4d_com_f_nurse", spawnCategory)
 	
 	-- Spawners
-	VJ.AddNPC("Random Common Infected","sent_vj_l4d_cominf",spawnCategory)
-	VJ.AddNPC("Random Common Infected Spawner","sent_vj_l4d_cominf_sp",spawnCategory)
-	VJ.AddNPC("AI Director","sent_vj_l4d_director",spawnCategory,true)
+	VJ.AddNPC("Random Common Infected", "sent_vj_l4d_cominf", spawnCategory)
+	VJ.AddNPC("Random Common Infected Spawner", "sent_vj_l4d_cominf_sp", spawnCategory)
+	VJ.AddNPC("AI Director", "sent_vj_l4d_director", spawnCategory, true)
 	
 	-- Entities
 	VJ.AddEntity("Pipe Bomb", "obj_vj_l4d_pipebomb", "DrVrej", false, 0, true, "VJ Base")
 	
 	-- Weapons
-	VJ.AddNPCWeapon("VJ_L4D_Pipe_Bomb","weapon_vj_l4d_pipebomb")
+	VJ.AddNPCWeapon("VJ_L4D_Pipe_Bomb", "weapon_vj_l4d_pipebomb")
 	VJ.AddWeapon("Pipe Bomb", "weapon_vj_l4d_pipebomb", true, spawnCategory)
 	
 	game.AddAmmoType({name="pipebomb", dmgtype=DMG_BLAST})
@@ -56,7 +56,7 @@ if VJExists == true then
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------ Particles ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	VJ.AddParticle("particles/vj_l4d_common.pcf",{
+	VJ.AddParticle("particles/vj_l4d_common.pcf", {
 		"vj_l4d_balloon",
 		"vj_l4d_balloon_body",
 		"vj_l4d_balloon_string",
@@ -107,26 +107,26 @@ if VJExists == true then
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------ Convars & Menu ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	VJ.AddConVar("vj_l4d_alllowclimbing",0,{FCVAR_ARCHIVE})
+	VJ.AddConVar("vj_l4d_alllowclimbing", 0, {FCVAR_ARCHIVE})
 	
-	VJ.AddConVar("vj_l4d_director_enabled",1)
-	VJ.AddConVar("vj_l4d_director_maxci",80)
-	VJ.AddConVar("vj_l4d_director_mobcount",35)
-	VJ.AddConVar("vj_l4d_director_spawnmax",2000)
-	VJ.AddConVar("vj_l4d_director_spawnmin",650)
-	VJ.AddConVar("vj_l4d_director_mobchance",100)
-	VJ.AddConVar("vj_l4d_director_mobcooldownmin",120)
-	VJ.AddConVar("vj_l4d_director_mobcooldownmax",180)
-	VJ.AddConVar("vj_l4d_director_delaymin",0.85)
-	VJ.AddConVar("vj_l4d_director_delaymax",3)
-	VJ.AddClientConVar("vj_l4d_director_music",1)
-	VJ.AddClientConVar("vj_l4d_director_musicvolume",0.1)
+	VJ.AddConVar("vj_l4d_director_enabled", 1)
+	VJ.AddConVar("vj_l4d_director_maxci", 80)
+	VJ.AddConVar("vj_l4d_director_mobcount", 35)
+	VJ.AddConVar("vj_l4d_director_spawnmax", 2000)
+	VJ.AddConVar("vj_l4d_director_spawnmin", 650)
+	VJ.AddConVar("vj_l4d_director_mobchance", 100)
+	VJ.AddConVar("vj_l4d_director_mobcooldownmin", 120)
+	VJ.AddConVar("vj_l4d_director_mobcooldownmax", 180)
+	VJ.AddConVar("vj_l4d_director_delaymin", 0.85)
+	VJ.AddConVar("vj_l4d_director_delaymax", 3)
+	VJ.AddClientConVar("vj_l4d_director_music", 1)
+	VJ.AddClientConVar("vj_l4d_director_musicvolume", 0.1)
 	
 	if CLIENT then
 		hook.Add("PopulateToolMenu", "VJ_ADDTOMENU_L4D", function()
 			spawnmenu.AddToolMenuOption("DrVrej", "SNPC Configures", "Left 4 Dead - Director", "Left 4 Dead - Director", "", "", function(Panel)
 				Panel:AddControl("Checkbox", {Label = "Enable Music?", Command = "vj_l4d_director_music"})
-				Panel:AddControl("Slider", { Label 	= "Music Volume", Command = "vj_l4d_director_musicvolume", Type = "Float", Min = "0.1", Max = "0.9"})
+				Panel:AddControl("Slider", { Label = "Music Volume", Command = "vj_l4d_director_musicvolume", Type = "Float", Min = "0.1", Max = "0.9"})
 				if !game.SinglePlayer() && !LocalPlayer():IsAdmin() then
 					Panel:AddControl("Label", {Text = "#vjbase.menu.general.admin.not"})
 					Panel:AddControl( "Label", {Text = "#vjbase.menu.general.admin.only"})
@@ -134,15 +134,15 @@ if VJExists == true then
 				end
 				Panel:AddControl( "Label", {Text = "#vjbase.menu.general.admin.only"})
 				Panel:AddControl("Checkbox", {Label = "Enable AI Director processing?", Command = "vj_l4d_director_enabled"})
-				Panel:AddControl("Slider", { Label 	= "Max Common Infected", Command = "vj_l4d_director_maxci", Type = "Float", Min = "5", Max = "400"})
-				Panel:AddControl("Slider", { Label 	= "Min Distance they can spawn from players", Command = "vj_l4d_director_spawnmin", Type = "Float", Min = "150", Max = "30000"})
-				Panel:AddControl("Slider", { Label 	= "Max Distance they can spawn from players", Command = "vj_l4d_director_spawnmax", Type = "Float", Min = "150", Max = "30000"})
-				Panel:AddControl("Slider", { Label 	= "Min time between spawns", Command = "vj_l4d_director_delaymin", Type = "Float", Min = "0.1", Max = "15"})
-				Panel:AddControl("Slider", { Label 	= "Max time between spawns", Command = "vj_l4d_director_delaymax", Type = "Float", Min = "0.2", Max = "15"})
-				Panel:AddControl("Slider", { Label 	= "Max Mob Common Infected", Command = "vj_l4d_director_mobcount", Type = "Float", Min = "5", Max = "400"})
-				Panel:AddControl("Slider", { Label 	= "Chance that a mob will appear", Command = "vj_l4d_director_mobchance", Type = "Float", Min = "1", Max = "500"})
-				Panel:AddControl("Slider", { Label 	= "Min cooldown time for mob spawns", Command = "vj_l4d_director_mobcooldownmin", Type = "Float", Min = "1", Max = "800"})
-				Panel:AddControl("Slider", { Label 	= "Max cooldown time for mob spawns", Command = "vj_l4d_director_mobcooldownmax", Type = "Float", Min = "1", Max = "800"})
+				Panel:AddControl("Slider", {Label = "Max Common Infected", Command = "vj_l4d_director_maxci", Type = "Float", Min = "5", Max = "400"})
+				Panel:AddControl("Slider", {Label = "Min Distance they can spawn from players", Command = "vj_l4d_director_spawnmin", Type = "Float", Min = "150", Max = "30000"})
+				Panel:AddControl("Slider", {Label = "Max Distance they can spawn from players", Command = "vj_l4d_director_spawnmax", Type = "Float", Min = "150", Max = "30000"})
+				Panel:AddControl("Slider", {Label = "Min time between spawns", Command = "vj_l4d_director_delaymin", Type = "Float", Min = "0.1", Max = "15"})
+				Panel:AddControl("Slider", {Label = "Max time between spawns", Command = "vj_l4d_director_delaymax", Type = "Float", Min = "0.2", Max = "15"})
+				Panel:AddControl("Slider", {Label = "Max Mob Common Infected", Command = "vj_l4d_director_mobcount", Type = "Float", Min = "5", Max = "400"})
+				Panel:AddControl("Slider", {Label = "Chance that a mob will appear", Command = "vj_l4d_director_mobchance", Type = "Float", Min = "1", Max = "500"})
+				Panel:AddControl("Slider", {Label = "Min cooldown time for mob spawns", Command = "vj_l4d_director_mobcooldownmin", Type = "Float", Min = "1", Max = "800"})
+				Panel:AddControl("Slider", {Label = "Max cooldown time for mob spawns", Command = "vj_l4d_director_mobcooldownmax", Type = "Float", Min = "1", Max = "800"})
 			end)
 		
 			spawnmenu.AddToolMenuOption("DrVrej", "SNPC Configures", "Left 4 Dead", "Left 4 Dead", "", "", function(Panel)
@@ -152,7 +152,7 @@ if VJExists == true then
 					return
 				end
 				Panel:AddControl( "Label", {Text = "#vjbase.menu.general.admin.only"})
-				Panel:AddControl("Button",{Text = "#vjbase.menu.general.reset.everything", Command = "vj_l4d_alllowclimbing 0"})
+				Panel:AddControl("Button", {Text = "#vjbase.menu.general.reset.everything", Command = "vj_l4d_alllowclimbing 0"})
 				Panel:AddControl("Checkbox", {Label = "Enable Climbing (Experimental)", Command = "vj_l4d_alllowclimbing"})
 				Panel:ControlHelp("WARNING: Enabling climbing can cause heavy performance drops!")
 			end)
@@ -160,9 +160,9 @@ if VJExists == true then
 	end
 	
 	VJ_L4D_NODEPOS = {}
-	hook.Add("EntityRemoved","VJ_AddNodes_L4D",function(ent)
+	hook.Add("EntityRemoved", "VJ_AddNodes_L4D", function(ent)
 		if ent:GetClass() == "info_node" then
-			table.insert(VJ_L4D_NODEPOS,ent:GetPos())
+			table.insert(VJ_L4D_NODEPOS, ent:GetPos())
 		end
 	end)
 	

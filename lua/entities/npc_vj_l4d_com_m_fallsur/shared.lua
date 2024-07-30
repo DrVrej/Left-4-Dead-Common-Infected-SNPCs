@@ -1,6 +1,6 @@
-ENT.Base 			= "npc_vj_l4d_com_male"
+ENT.Base 			= "npc_vj_creature_base"
 ENT.Type 			= "ai"
-ENT.PrintName 		= "Uncommon Infected (Fallen Survivor)"
+ENT.PrintName 		= "Fallen Survivor Infected"
 ENT.Author 			= "DrVrej"
 ENT.Contact 		= "http://steamcommunity.com/groups/vrejgaming"
 ENT.Purpose 		= "Spawn it and fight with it!"

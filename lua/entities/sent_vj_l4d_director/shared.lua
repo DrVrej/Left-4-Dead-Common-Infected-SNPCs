@@ -7,8 +7,8 @@ ENT.Purpose			= ""
 ENT.Instructions	= ""
 ENT.Category		= "Left 4 Dead"
 
-ENT.Spawnable			= false
-ENT.AdminSpawnable		= false
+ENT.Spawnable		= false
+ENT.AdminSpawnable	= false
 
 if CLIENT then
 	function ENT:Draw()

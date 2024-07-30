@@ -1,5 +1,5 @@
 AddCSLuaFile("shared.lua")
-include('shared.lua')
+include("shared.lua")
 
 local table_insert = table.insert
 local table_remove = table.remove

@@ -1,14 +1,15 @@
+include("vj_base/extension/l4d_com_infected.lua")
 AddCSLuaFile("shared.lua")
-include('shared.lua')
+include("shared.lua")
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2021 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2024 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = "models/cpthazama/l4d1/common/common_military_male01.mdl" -- The game will pick a random model from the table when the SNPC is spawned | Add as many as you want
-ENT.StartHealth = 70
+ENT.StartHealth = 80
 
-ENT.SoundTbl_FootStep = {"vj_l4d_com/footstep/concrete1.wav","vj_l4d_com/footstep/concrete2.wav","vj_l4d_com/footstep/concrete3.wav","vj_l4d_com/footstep/concrete4.wav"}
+ENT.SoundTbl_FootStep = {"vj_l4d_com/footstep/concrete1.wav", "vj_l4d_com/footstep/concrete2.wav", "vj_l4d_com/footstep/concrete3.wav", "vj_l4d_com/footstep/concrete4.wav"}
 
 ENT.FootStepSoundLevel = 80
 ---------------------------------------------------------------------------------------------------------------------------------------------
