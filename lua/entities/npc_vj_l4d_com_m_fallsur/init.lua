@@ -6,7 +6,7 @@ include("shared.lua")
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = "models/cpthazama/l4d2/common/common_male_fallen_survivor.mdl" -- The game will pick a random model from the table when the SNPC is spawned | Add as many as you want
+ENT.Model = "models/cpthazama/l4d2/common/common_male_fallen_survivor.mdl" -- Model(s) to spawn with | Picks a random one if it's a table
 ENT.StartHealth = 150
 ENT.AllowedToGib = false -- Is it allowed to gib in general? This can be on death or when shot in a certain place
 ENT.ItemDropsOnDeathChance = 1 -- If set to 1, it will always drop it

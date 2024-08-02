@@ -12,7 +12,7 @@ ENT.CustomBlood_Decal = {"VJ_L4D_Blood"} -- Decals to spawn when it's damaged
 ENT.PoseParameterLooking_Names = {pitch = {"body_pitch"}, yaw = {"body_yaw"}, roll = {}} -- Custom pose parameters to use, can put as many as needed
 ENT.HasBloodPool = false -- Does it have a blood pool?
 
-ENT.HasMeleeAttack = true -- Should the SNPC have a melee attack?
+ENT.HasMeleeAttack = true -- Can this NPC melee attack?
 ENT.MeleeAttackDamage = 10
 ENT.AnimTbl_MeleeAttack = "vjges_"..ACT_MELEE_ATTACK2
 ENT.TimeUntilMeleeAttackDamage = false -- This counted in seconds | This calculates the time until it hits something
