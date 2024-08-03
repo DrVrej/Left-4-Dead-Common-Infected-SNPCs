@@ -30,7 +30,7 @@ ENT.HasMeleeAttackSlowPlayerSound = false -- Does it have a sound when it slows 
 	-- ====== Flinching Code ====== --
 ENT.CanFlinch = 1 -- 0 = Don't flinch | 1 = Flinch at any damage | 2 = Flinch only from certain damages
 ENT.FlinchChance = 12 -- Chance of it flinching from 1 to x | 1 will make it always flinch
-ENT.AnimTbl_Flinch = {"Shoved_Backward_01"} // "vjges_flinch_01" -- If it uses normal based animation, use this
+ENT.AnimTbl_Flinch = "Shoved_Backward_01" // "vjges_flinch_01" -- If it uses normal based animation, use this
 ENT.HitGroupFlinching_Values = {
 	{HitGroup = {HITGROUP_HEAD}, Animation = {"HeadshotFront"}},
 	//{HitGroup = {HITGROUP_CHEST, HITGROUP_STOMACH}, Animation = {"Shoved_Backward_01"}} -- Since there isn't any animation for legs or arms, just use this as general anim
@@ -264,7 +264,7 @@ function ENT:CustomOnThink_AIEnabled()
 		self.Zombie_IdleStateChangeT = CurTime() + math.Rand(10, 80)
 	end
 	
-	-- Experimental Climbing System
+	-- Experimental Climbing System (Very old!)
 	//print(self:GetBlockingEntity())
 	// IsValid(self:GetBlockingEntity()) && !self:GetBlockingEntity():IsNPC() && !self:GetBlockingEntity():IsPlayer()
 	if self.Zombie_CanClimb == true && self.Dead == false && self.Zombie_IsClimbing == false && CurTime() > self.Zombie_NextClimbT then
