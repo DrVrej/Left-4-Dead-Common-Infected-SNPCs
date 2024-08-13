@@ -51,7 +51,7 @@ function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo, hitgroup)
 	//spark:SetAngles(dmginfo:GetDamagePosition():Angle())
 	//spark:SetScale(0.1)
 	//util.Effect("StunstickImpact", spark)
-	if self.HasSounds == true && self.HasImpactSounds == true then VJ.EmitSound(self, "vj_impact_metal/bullet_metal/metalsolid"..math.random(1, 10)..".wav", 70) end
+	if self.HasSounds == true && self.HasImpactSounds == true then VJ.EmitSound(self, "vj_base/impact/armor"..math.random(1, 10)..".wav", 70) end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:CustomOnDeath_AfterCorpseSpawned(dmginfo, hitgroup, corpseEnt)
