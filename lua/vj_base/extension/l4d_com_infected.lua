@@ -35,8 +35,7 @@ ENT.HitGroupFlinching_Values = {
 	{HitGroup = {HITGROUP_HEAD}, Animation = {"HeadshotFront"}},
 	//{HitGroup = {HITGROUP_CHEST, HITGROUP_STOMACH}, Animation = {"Shoved_Backward_01"}} -- Since there isn't any animation for legs or arms, just use this as general anim
 }
--- ====== File Path Variables ====== --
--- Leave blank if you don't want any sounds to play
+	-- ====== Sound Paths ====== --
 ENT.SoundTbl_FootStep = {"vj_l4d_com/footstep/dirt1.wav", "vj_l4d_com/footstep/dirt2.wav", "vj_l4d_com/footstep/dirt3.wav", "vj_l4d_com/footstep/dirt4.wav"}
 ENT.SoundTbl_Breath = {"vj_l4d_com/idle_breath/breathing01.wav", "vj_l4d_com/idle_breath/breathing08.wav", "vj_l4d_com/idle_breath/breathing09.wav", "vj_l4d_com/idle_breath/breathing10.wav", "vj_l4d_com/idle_breath/breathing13.wav", "vj_l4d_com/idle_breath/breathing16.wav", "vj_l4d_com/idle_breath/breathing18.wav", "vj_l4d_com/idle_breath/breathing25.wav", "vj_l4d_com/idle_breath/breathing26.wav", "vj_l4d_com/idle_breath/idle_breath_01.wav", "vj_l4d_com/idle_breath/idle_breath_02.wav", "vj_l4d_com/idle_breath/idle_breath_03.wav", "vj_l4d_com/idle_breath/idle_breath_04.wav", "vj_l4d_com/idle_breath/idle_breath_06.wav"}
 ENT.SoundTbl_Idle = {"vj_l4d_com/idle/mumbling01.wav", "vj_l4d_com/idle/mumbling02.wav", "vj_l4d_com/idle/mumbling03.wav", "vj_l4d_com/idle/mumbling04.wav", "vj_l4d_com/idle/mumbling05.wav", "vj_l4d_com/idle/mumbling06.wav", "vj_l4d_com/idle/mumbling07.wav", "vj_l4d_com/idle/mumbling08.wav", "vj_l4d_com/idle/moan01.wav", "vj_l4d_com/idle/moan02.wav", "vj_l4d_com/idle/moan03.wav", "vj_l4d_com/idle/moan04.wav", "vj_l4d_com/idle/moan05.wav", "vj_l4d_com/idle/moan06.wav", "vj_l4d_com/idle/moan07.wav", "vj_l4d_com/idle/moan08.wav", "vj_l4d_com/idle/moan09.wav"}
