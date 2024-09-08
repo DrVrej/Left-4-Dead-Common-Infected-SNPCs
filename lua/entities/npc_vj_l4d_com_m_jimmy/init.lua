@@ -1,4 +1,4 @@
-include("vj_base/extension/l4d_com_infected.lua")
+include("vj_base/extensions/l4d_com_infected.lua")
 AddCSLuaFile("shared.lua")
 include("shared.lua")
 /*-----------------------------------------------
