@@ -211,14 +211,14 @@ function ENT:CustomOnCallForHelp(ally, isFirst)
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnSetEnemyOnDamage(dmginfo, hitgroup)
+function ENT:OnSetEnemyFromDamage(dmginfo, hitgroup)
 	if self.Zombie_IdleState == IDLE_STATE_NORMAL && math.random(1, 2) == 1 then
 		self:VJ_ACT_PLAYACTIVITY(animDmgSetEnemy, true, math.Rand(1.5, 3), true)
 		self.Zombie_NoAlertAnimation = true
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnResetEnemy()
+function ENT:OnResetEnemy()
 	self.Zombie_IdleStateChangeT = CurTime() + math.Rand(10, 80)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
