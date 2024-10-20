@@ -8,7 +8,7 @@ include("shared.lua")
 -----------------------------------------------*/
 ENT.Model = "models/cpthazama/l4d2/common/common_male_ceda.mdl" -- Model(s) to spawn with | Picks a random one if it's a table
 ENT.Immune_Fire = true -- Immune to fire-type damages
-ENT.AllowedToGib = false -- Is it allowed to gib in general? This can be on death or when shot in a certain place
+ENT.CanGib = false -- Can the NPC gib? | Makes "CreateGibEntity" fail and overrides "CanGibOnDeath" to false
 
 local sdDeflate = {"vj_l4d_com/ceda/ceda_suit_deflate.wav", "vj_l4d_com/ceda/ceda_suit_deflate_02.wav", "vj_l4d_com/ceda/ceda_suit_deflate_03.wav"}
 
@@ -31,17 +31,17 @@ function ENT:Zombie_CustomOnInitialize()
 	self.MaskModel:AddEffects(EF_BONEMERGE)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-local orgFunc = ENT.CustomOnTakeDamage_AfterDamage
+local orgDmgFunc = ENT.OnDamaged
 --
-function ENT:CustomOnTakeDamage_AfterDamage(dmginfo, hitgroup)
-	orgFunc(self, dmginfo, hitgroup)
-	if self.Zombie_HazmatBroken == false then
+function ENT:OnDamaged(dmginfo, hitgroup, status)
+	if status == "PostDamage" && self.Zombie_HazmatBroken == false then
 		self.Zombie_HazmatBroken = true
 		VJ.EmitSound(self, sdDeflate, self.PainSoundLevel, math.random(90, 100))
 	end
+	orgDmgFunc(self, dmginfo, hitgroup, status)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnDeath_AfterCorpseSpawned(dmginfo, hitgroup, corpseEnt)
+function ENT:OnCreateDeathCorpse(dmginfo, hitgroup, corpseEnt)
 	self.MaskModel:SetOwner(corpseEnt)
 	self.MaskModel:SetParent(corpseEnt)
 end

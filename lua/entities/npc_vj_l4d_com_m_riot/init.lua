@@ -8,7 +8,7 @@ include("shared.lua")
 -----------------------------------------------*/
 ENT.Model = "models/cpthazama/l4d2/common/common_male_riot.mdl" -- Model(s) to spawn with | Picks a random one if it's a table
 ENT.StartHealth = 250
-ENT.AllowedToGib = false -- Is it allowed to gib in general? This can be on death or when shot in a certain place
+ENT.CanGib = false -- Can the NPC gib? | Makes "CreateGibEntity" fail and overrides "CanGibOnDeath" to false
 
 ENT.SoundTbl_FootStep = {"vj_l4d_com/footstep/riot/tile1.wav", "vj_l4d_com/footstep/riot/tile2.wav", "vj_l4d_com/footstep/riot/tile3.wav", "vj_l4d_com/footstep/riot/tile4.wav"}
 
@@ -31,30 +31,35 @@ function ENT:Zombie_CustomOnInitialize()
 	self.MaskModel = mask
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo, hitgroup)
-	-- Break the mask if it takes too much damage
-	if hitgroup == HITGROUP_HEAD && IsValid(self.MaskModel) then
-		self.ZombieRiot_MaskHP = self.ZombieRiot_MaskHP - dmginfo:GetDamage()
-		if self.ZombieRiot_MaskHP <= 0 then -- Mask broke!
-			self.MaskModel:Remove()
-			VJ.EmitSound(self, "physics/glass/glass_impact_bullet"..math.random(1, 4)..".wav", 80)
+local orgDmgFunc = ENT.OnDamaged
+--
+function ENT:OnDamaged(dmginfo, hitgroup, status)
+	if status == "PreDamage" then
+		-- Break the mask if it takes too much damage
+		if hitgroup == HITGROUP_HEAD && IsValid(self.MaskModel) then
+			self.ZombieRiot_MaskHP = self.ZombieRiot_MaskHP - dmginfo:GetDamage()
+			if self.ZombieRiot_MaskHP <= 0 then -- Mask broke!
+				self.MaskModel:Remove()
+				VJ.EmitSound(self, "physics/glass/glass_impact_bullet"..math.random(1, 4)..".wav", 80)
+			end
 		end
+		
+		-- Only take FULL damage from the back side otherwise only 25%
+		if hitgroup != 20 then
+			dmginfo:ScaleDamage(0.25)
+		end
+		
+		//local spark = EffectData()
+		//spark:SetOrigin(dmginfo:GetDamagePosition())
+		//spark:SetAngles(dmginfo:GetDamagePosition():Angle())
+		//spark:SetScale(0.1)
+		//util.Effect("StunstickImpact", spark)
+		if self.HasSounds == true && self.HasImpactSounds == true then VJ.EmitSound(self, "vj_base/impact/armor"..math.random(1, 10)..".wav", 70) end
 	end
-	
-	-- Only take FULL damage from the back side otherwise only 25%
-	if hitgroup != 20 then
-		dmginfo:ScaleDamage(0.25)
-	end
-	
-	//local spark = EffectData()
-	//spark:SetOrigin(dmginfo:GetDamagePosition())
-	//spark:SetAngles(dmginfo:GetDamagePosition():Angle())
-	//spark:SetScale(0.1)
-	//util.Effect("StunstickImpact", spark)
-	if self.HasSounds == true && self.HasImpactSounds == true then VJ.EmitSound(self, "vj_base/impact/armor"..math.random(1, 10)..".wav", 70) end
+	orgDmgFunc(self, dmginfo, hitgroup, status)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnDeath_AfterCorpseSpawned(dmginfo, hitgroup, corpseEnt)
+function ENT:OnCreateDeathCorpse(dmginfo, hitgroup, corpseEnt)
 	if IsValid(self.MaskModel) then
 		self.MaskModel:SetOwner(corpseEnt)
 		self.MaskModel:SetParent(corpseEnt)

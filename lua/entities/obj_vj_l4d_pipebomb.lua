@@ -50,7 +50,7 @@ function ENT:CustomPhysicsObjectOnInitialize(phys)
 	phys:SetBuoyancyRatio(0)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnInitialize()
+function ENT:Init()
 	self:SetHealth(1)
 	for _, v in pairs(ents.FindInSphere(self:GetPos(), 4000)) do
 		if v:IsNPC() && v.IsVJL4DCommonInfected && v.Zombie_CanHearPipe && v.Zombie_NextPipBombT < CurTime() then
@@ -150,7 +150,7 @@ function ENT:Beep(vol)
 	end)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnThink()
+function ENT:OnThink()
 	for _,v in ipairs(self.Zombies) do
 		if IsValid(v) then
 			v:SetLastPosition(self:GetPos())

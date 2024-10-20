@@ -7,7 +7,7 @@ include("shared.lua")
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
 ENT.Model = "models/cpthazama/l4d2/common/common_male_clown.mdl" -- Model(s) to spawn with | Picks a random one if it's a table
-ENT.AllowedToGib = false -- Is it allowed to gib in general? This can be on death or when shot in a certain place
+ENT.CanGib = false -- Can the NPC gib? | Makes "CreateGibEntity" fail and overrides "CanGibOnDeath" to false
 
 ENT.SoundTbl_FootStep = {"vj_l4d_com/footstep/clown/concrete1.wav", "vj_l4d_com/footstep/clown/concrete2.wav", "vj_l4d_com/footstep/clown/concrete3.wav", "vj_l4d_com/footstep/clown/concrete4.wav", "vj_l4d_com/footstep/clown/concrete5.wav", "vj_l4d_com/footstep/clown/concrete6.wav", "vj_l4d_com/footstep/clown/concrete7.wav", "vj_l4d_com/footstep/clown/concrete8.wav"}
 
@@ -15,7 +15,7 @@ ENT.FootStepSoundLevel = 80
 
 local defPos = Vector(0, 0, 0)
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_OnBleed(dmginfo, hitgroup)
+function ENT:OnBleed(dmginfo, hitgroup)
 	if math.random(1, 3) != 1 then return end
 	local pos = dmginfo:GetDamagePosition()
 	if pos == defPos then return end

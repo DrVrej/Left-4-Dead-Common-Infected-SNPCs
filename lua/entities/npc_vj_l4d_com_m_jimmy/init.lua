@@ -9,6 +9,6 @@ include("shared.lua")
 ENT.Model = "models/cpthazama/l4d2/common/common_male_jimmy.mdl" -- Model(s) to spawn with | Picks a random one if it's a table
 ENT.StartHealth = 1000
 ENT.Immune_Fire = true -- Immune to fire-type damages
-ENT.AllowedToGib = false -- Is it allowed to gib in general? This can be on death or when shot in a certain place
+ENT.CanGib = false -- Can the NPC gib? | Makes "CreateGibEntity" fail and overrides "CanGibOnDeath" to false
 
 ENT.Zombie_CanHearPipe = false -- Can it hear the pipe bombs?

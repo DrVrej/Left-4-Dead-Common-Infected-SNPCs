@@ -24,7 +24,7 @@ SWEP.AdminOnly = true
 	-- Primary Fire ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.Primary.Damage = 0 -- Damage
 SWEP.Primary.Force = 1 -- Force applied on the object the bullet hits
-SWEP.Primary.ClipSize = 1 -- Max amount of bullets per clip
+SWEP.Primary.ClipSize = 1 -- Max amount of rounds per clip
 SWEP.Primary.Recoil = 2 -- How much recoil does the player get?
 SWEP.Primary.Delay = 10 -- Time until it can shoot again
 SWEP.Primary.Automatic = false -- Should the weapon continue firing as long as the attack button is held down?
@@ -58,7 +58,7 @@ SWEP.ViewModelAdjust = {
 	Ang = {Right = 0, Up = 0, Forward = 0}
 }
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function SWEP:CustomOnInitialize()
+function SWEP:Init()
 	if CLIENT then
 		local owner = self:GetOwner()
 		if IsValid(owner) && owner:IsPlayer() then

@@ -8,7 +8,7 @@ include("shared.lua")
 -----------------------------------------------*/
 ENT.Model = "models/cpthazama/l4d2/common/common_male_fallen_survivor.mdl" -- Model(s) to spawn with | Picks a random one if it's a table
 ENT.StartHealth = 150
-ENT.AllowedToGib = false -- Is it allowed to gib in general? This can be on death or when shot in a certain place
+ENT.CanGib = false -- Can the NPC gib? | Makes "CreateGibEntity" fail and overrides "CanGibOnDeath" to false
 ENT.ItemDropsOnDeathChance = 1 -- If set to 1, it will always drop it
 ENT.ItemDropsOnDeath_EntityList = {
     "item_healthvial",
@@ -22,8 +22,11 @@ function ENT:Zombie_CustomOnInitialize()
 	self:SetBodygroup(1, math.random(0, 2))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_BeforeDamage(dmginfo, hitgroup)
-	if hitgroup == HITGROUP_HEAD then
+local orgDmgFunc = ENT.OnDamaged
+--
+function ENT:OnDamaged(dmginfo, hitgroup, status)
+	if status == "PreDamage" && hitgroup == HITGROUP_HEAD then
 		dmginfo:ScaleDamage(0.75)
 	end
+	orgDmgFunc(self, dmginfo, hitgroup, status)
 end

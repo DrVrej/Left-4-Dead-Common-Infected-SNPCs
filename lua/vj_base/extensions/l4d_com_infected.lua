@@ -21,7 +21,7 @@ ENT.SlowPlayerOnMeleeAttackTime = 0.5 -- How much time until player's Speed rese
 
 ENT.GibOnDeathDamagesTable = {"All"} -- Damages that it gibs from | "UseDefault" = Uses default damage types | "All" = Gib from any damage
 ENT.HasDeathAnimation = true -- Does it play an animation when it dies?
-ENT.AnimTbl_Death = {"death_01", "death_02a", "death_02c", "death_03", "death_05", "death_06", "death_07", "death_08", "death_08b", "death_09", "death_10ab", "death_10b", "death_10c", "death_11_01a", "death_11_01b", "death_11_02a", "death_11_02b", "death_11_02c", "death_11_02d", "death_11_03a", "death_11_03b", "death_11_03c"} -- Death Animations
+ENT.AnimTbl_Death = {"death_01", "death_02a", "death_02c", "death_03", "death_05", "death_06", "death_07", "death_08", "death_08b", "death_09", "death_10ab", "death_10b", "death_10c", "death_11_01a", "death_11_01b", "death_11_02a", "death_11_02b", "death_11_02c", "death_11_02d", "death_11_03a", "death_11_03b", "death_11_03c"}
 ENT.DeathAnimationChance = 2 -- Put 1 if you want it to play the animation all the time
 
 ENT.DisableFootStepSoundTimer = true -- If set to true, it will disable the time system for the footstep sound code, allowing you to use other ways like model events
@@ -30,7 +30,7 @@ ENT.HasMeleeAttackSlowPlayerSound = false -- Does it have a sound when it slows 
 	-- ====== Flinching Code ====== --
 ENT.CanFlinch = 1 -- 0 = Don't flinch | 1 = Flinch at any damage | 2 = Flinch only from certain damages
 ENT.FlinchChance = 12 -- Chance of it flinching from 1 to x | 1 will make it always flinch
-ENT.AnimTbl_Flinch = "Shoved_Backward_01" // "vjges_flinch_01" -- If it uses normal based animation, use this
+ENT.AnimTbl_Flinch = "Shoved_Backward_01" // "vjges_flinch_01" -- The regular flinch animations to play
 ENT.HitGroupFlinching_Values = {
 	{HitGroup = {HITGROUP_HEAD}, Animation = {"HeadshotFront"}},
 	//{HitGroup = {HITGROUP_CHEST, HITGROUP_STOMACH}, Animation = {"Shoved_Backward_01"}} -- Since there isn't any animation for legs or arms, just use this as general anim
@@ -103,7 +103,7 @@ ENT.Zombie_NextClimbT = 0
 	- System to support shoving animations
 */
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnInitialize()
+function ENT:Init()
 	if self.Zombie_Gender == 1 then -- Female
 		self.SoundTbl_CombatIdle = sdFemale_CombatIdle
 		self.SoundTbl_Investigate = sdFemale_Investigate
@@ -161,8 +161,8 @@ function ENT:TranslateActivity(act)
 	return self.BaseClass.TranslateActivity(self, act)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnAcceptInput(key, activator, caller, data)
-	//print("OnAcceptInput", key, activator, caller, data)
+function ENT:OnInput(key, activator, caller, data)
+	//print("OnInput: ", key, activator, caller, data)
 	if key == "event_emit step" then
 		self:FootStepSoundCode()
 	elseif key == "event_mattack" then
@@ -179,17 +179,17 @@ end
 local math_clamp = math.Clamp
 local math_appAngle = math.ApproachAngle
 --
-function ENT:CustomOn_PoseParameterLookingCode(pitch, yaw, roll)
+function ENT:OnUpdatePoseParamTracking(pitch, yaw, roll)
 	local speed = self.PoseParameterLooking_TurningSpeed
 	self:SetPoseParameter("lean_pitch", math_clamp(math_appAngle(self:GetPoseParameter("lean_pitch"), -15, 15), pitch, speed))
 	self:SetPoseParameter("lean_yaw", math_clamp(math_appAngle(self:GetPoseParameter("lean_yaw"), -15, 15), yaw, speed))
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnInvestigate(argent)
+function ENT:OnInvestigate(ent)
 	self:VJ_ACT_PLAYACTIVITY("vjges_startled_delta_01", false) -- Makes their head look around (Gesture)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnAlert(argent)
+function ENT:OnAlert(ent)
 	if self.Zombie_NoAlertAnimation == false && self.Zombie_IdleState == IDLE_STATE_NORMAL && !self:IsMoving() && math.random (1, 3) == 1 then
 		self:VJ_ACT_PLAYACTIVITY("idle_alert_straight_05", true, math.Rand(1.5, 3), true) -- "idle_alert_straight_05", "idle_alert_straight_08"
 	end
@@ -203,7 +203,7 @@ function ENT:Allies_CallHelp(dist)
 	self.BaseClass.Allies_CallHelp(self, dist)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnCallForHelp(ally, isFirst)
+function ENT:OnCallForHelp(ally, isFirst)
 	if !isFirst then return end
 	-- Play call for help anim only if its standing and is not busy with other activity
 	if self.Zombie_IdleState == IDLE_STATE_NORMAL && !self:BusyWithActivity() then
@@ -222,7 +222,7 @@ function ENT:OnResetEnemy()
 	self.Zombie_IdleStateChangeT = CurTime() + math.Rand(10, 80)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnThink_AIEnabled()
+function ENT:OnThinkActive()
 	self:SetPoseParameter("move_x", 1) -- Kalelou hamar
 	
 	local eneValid = IsValid(self:GetEnemy())
@@ -323,24 +323,28 @@ function ENT:CustomOnThink_AIEnabled()
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage_AfterDamage(dmginfo, hitgroup)
-	self.Zombie_IdleStandT = 0
-	self.Zombie_IdleQuickStand = true
-	self.Zombie_IdleStateChangeT = CurTime() + math.Rand(5, 10)
-	
-	-- Randomly stumble when damaged while running
-	if !self.Flinching && !self:IsOnFire() && self:IsMoving() && self:GetActivity() == ACT_RUN && self.Zombie_NextStumbleT < CurTime() && math.random(1, 16) == 1 then
-		if self:IsPlayingGesture(self.CurrentAttackAnimation) then -- Stop the attack gesture!
-			self:RemoveGesture(self.CurrentAttackAnimation)
+function ENT:OnDamaged(dmginfo, hitgroup, status)
+	if status == "PostDamage" then
+		self.Zombie_IdleStandT = 0
+		self.Zombie_IdleQuickStand = true
+		self.Zombie_IdleStateChangeT = CurTime() + math.Rand(5, 10)
+		
+		-- Randomly stumble when damaged while running
+		if !self.Flinching && !self:IsOnFire() && self:IsMoving() && self:GetActivity() == ACT_RUN && self.Zombie_NextStumbleT < CurTime() && math.random(1, 16) == 1 then
+			if self:IsPlayingGesture(self.CurrentAttackAnimation) then -- Stop the attack gesture!
+				self:RemoveGesture(self.CurrentAttackAnimation)
+			end
+			self:VJ_ACT_PLAYACTIVITY("run_stumble_01", true, 2.4)
+			self.Zombie_NextStumbleT = CurTime() + math.Rand(8, 14)
 		end
-		self:VJ_ACT_PLAYACTIVITY("run_stumble_01", true, 2.4)
-		self.Zombie_NextStumbleT = CurTime() + math.Rand(8, 14)
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnFlinch_BeforeFlinch(dmginfo, hitgroup)
-	return self:GetSequence() != self:LookupSequence("run_stumble_01") -- If we are stumbling then DO NOT flinch!
-end -- Return false to disallow the flinch from playing
+function ENT:OnFlinch(dmginfo, hitgroup, status)
+	if status == "PriorExecution" then
+		return self:GetSequence() != self:LookupSequence("run_stumble_01") -- If we are stumbling then DO NOT flinch!
+	end
+end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:SetUpGibesOnDeath(dmginfo, hitgroup)
 	if self:IsDefaultGibDamageType(dmginfo:GetDamageType()) then self.HasDeathAnimation = false return end
@@ -354,7 +358,7 @@ function ENT:SetUpGibesOnDeath(dmginfo, hitgroup)
 			self.SoundTbl_Death = sdGoreHeadDeath
 			self:RemoveAllDecals()
 			self:Zombie_Gibs("h")
-			if self.HasGibDeathParticles == true then
+			if self.HasGibOnDeathEffects == true then
 				local bloodSpray = ents.Create("info_particle_system")
 				bloodSpray:SetKeyValue("effect_name", "blood_advisor_puncture_withdraw")
 				bloodSpray:SetPos(attachHead.Pos)
@@ -400,20 +404,17 @@ function ENT:CustomGibOnDeathSounds(dmginfo, hitgroup)
 	return false
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnPriorToKilled(dmginfo, hitgroup)
-	self.DeathAnimationChance = 1
-	if self.Zombie_IsClimbing or self.Zombie_IdleState != IDLE_STATE_NORMAL or self:IsOnFire() or self:GetSequence() == self:LookupSequence("run_stumble_01") then
+function ENT:OnDeath(dmginfo, hitgroup, status)
+	if status == "Initial" && self.Zombie_IsClimbing or self.Zombie_IdleState != IDLE_STATE_NORMAL or self:IsOnFire() or self:GetSequence() == self:LookupSequence("run_stumble_01") then
 		self.HasDeathAnimation = false
+	elseif status == "DeathAnim" then
+		if /*dmginfo:GetDamageForce():Length() > 10000 or*/ bit.band(dmginfo:GetDamageType(), DMG_BUCKSHOT) != 0 then -- This is rarely ran...
+			self.AnimTbl_Death = animDeathShotgun
+			//self.DeathAnimationTime = 0.5
+			self.DeathAnimationDecreaseLengthAmount = 0.1
+		elseif self:IsMoving() && self:GetActivity() == ACT_RUN then
+			self.AnimTbl_Death = animDeathRunning
+		end
+		ParticleEffectAttach("vj_l4d_froth", PATTACH_POINT_FOLLOW, self, 9)
 	end
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomDeathAnimationCode(dmginfo, hitgroup)
-	if /*dmginfo:GetDamageForce():Length() > 10000 or*/ bit.band(dmginfo:GetDamageType(), DMG_BUCKSHOT) != 0 then -- This is rarely ran...
-		self.AnimTbl_Death = animDeathShotgun
-		//self.DeathAnimationTime = 0.5
-		self.DeathAnimationDecreaseLengthAmount = 0.1
-	elseif self:IsMoving() && self:GetActivity() == ACT_RUN then
-		self.AnimTbl_Death = animDeathRunning
-	end
-	ParticleEffectAttach("vj_l4d_froth", PATTACH_POINT_FOLLOW, self, 9)
 end
