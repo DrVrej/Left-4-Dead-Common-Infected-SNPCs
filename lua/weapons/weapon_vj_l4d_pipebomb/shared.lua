@@ -67,25 +67,27 @@ function SWEP:Init()
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function SWEP:CustomOnPrimaryAttack_BeforeShoot()
-	if CLIENT then return end
-	timer.Simple(1.3, function()
-		local owner = self:GetOwner()
-		if IsValid(self) && IsValid(owner) && owner:GetActiveWeapon() == self then
-			local pipeBomb = ents.Create("obj_vj_l4d_pipebomb")
-			pipeBomb:SetPos(owner:GetShootPos())
-			pipeBomb:SetAngles(owner:GetAngles())
-			pipeBomb:SetOwner(owner)
-			pipeBomb:Activate()
-			pipeBomb:Spawn()
+function SWEP:OnPrimaryAttack(status, statusData)
+	if status == "Initial" then
+		if CLIENT then return end
+		timer.Simple(1.3, function()
+			local owner = self:GetOwner()
+			if IsValid(self) && IsValid(owner) && owner:GetActiveWeapon() == self then
+				local pipeBomb = ents.Create("obj_vj_l4d_pipebomb")
+				pipeBomb:SetPos(owner:GetShootPos())
+				pipeBomb:SetAngles(owner:GetAngles())
+				pipeBomb:SetOwner(owner)
+				pipeBomb:Activate()
+				pipeBomb:Spawn()
 
-			local phys = pipeBomb:GetPhysicsObject()
-			if phys:IsValid() then
-				phys:ApplyForceCenter(owner:GetAimVector()*5000 + owner:GetUp()*1500)
-				phys:SetAngleVelocity(Vector(math.Rand(-160, 160), math.Rand(-160, 160), math.Rand(-160, 160)))
+				local phys = pipeBomb:GetPhysicsObject()
+				if phys:IsValid() then
+					phys:ApplyForceCenter(owner:GetAimVector()*5000 + owner:GetUp()*1500)
+					phys:SetAngleVelocity(Vector(math.Rand(-160, 160), math.Rand(-160, 160), math.Rand(-160, 160)))
+				end
 			end
-		end
-	end)
+		end)
+	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 if CLIENT then

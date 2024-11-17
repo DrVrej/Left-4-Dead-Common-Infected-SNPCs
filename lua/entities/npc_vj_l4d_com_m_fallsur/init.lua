@@ -9,8 +9,8 @@ include("shared.lua")
 ENT.Model = "models/cpthazama/l4d2/common/common_male_fallen_survivor.mdl" -- Model(s) to spawn with | Picks a random one if it's a table
 ENT.StartHealth = 150
 ENT.CanGib = false -- Can the NPC gib? | Makes "CreateGibEntity" fail and overrides "CanGibOnDeath" to false
-ENT.ItemDropsOnDeathChance = 1 -- If set to 1, it will always drop it
-ENT.ItemDropsOnDeath_EntityList = {
+ENT.DeathLootChance = 1 -- If set to 1, it will always drop loot
+ENT.DeathLoot = {
     "item_healthvial",
     "item_battery",
     "item_ammo_smg1_grenade",
