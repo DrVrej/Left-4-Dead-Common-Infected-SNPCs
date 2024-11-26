@@ -55,7 +55,7 @@ function ENT:Init()
 	for _, v in pairs(ents.FindInSphere(self:GetPos(), 4000)) do
 		if v:IsNPC() && v.IsVJL4DCommonInfected && v.Zombie_CanHearPipe && v.Zombie_NextPipBombT < CurTime() then
 			v.Zombie_NextPipBombT = CurTime() + 6.9
-			v:VJ_DoSetEnemy(self, true)
+			v:ForceSetEnemy(self, true)
 			table.insert(self.Zombies, v)
 		end
 	end
