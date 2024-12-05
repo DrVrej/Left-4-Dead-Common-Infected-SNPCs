@@ -490,7 +490,7 @@ function ENT:SpawnInfected(ent,pos,isMob)
 	infected:Spawn()
 	table_insert(self.tbl_SpawnedNPCs,infected)
 	if isMob then
-		infected.FindEnemy_UseSphere = true
+		infected.SightAngle = 360
 		infected.FindEnemy_CanSeeThroughWalls = true
 		infected:DrawShadow(false)
 		timer.Simple(0,function()
@@ -519,7 +519,7 @@ function ENT:SpawnSpecialInfected(ent,pos)
 	infected:SetAngles(Angle(0,math.random(0,360),0))
 	infected:Spawn()
 	infected:SetGhost(true)
-	infected.FindEnemy_UseSphere = true
+	infected.SightAngle = 360
 	infected.FindEnemy_CanSeeThroughWalls = true
 	table_insert(self.tbl_SpawnedSpecialInfected,infected)
 	infected.AI_Director = self
