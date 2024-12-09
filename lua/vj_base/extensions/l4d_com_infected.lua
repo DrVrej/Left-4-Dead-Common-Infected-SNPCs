@@ -186,12 +186,12 @@ function ENT:OnUpdatePoseParamTracking(pitch, yaw, roll)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnInvestigate(ent)
-	self:VJ_ACT_PLAYACTIVITY("vjges_startled_delta_01", false) -- Makes their head look around (Gesture)
+	self:PlayAnim("vjges_startled_delta_01", false) -- Makes their head look around (Gesture)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnAlert(ent)
 	if self.Zombie_NoAlertAnimation == false && self.Zombie_IdleState == IDLE_STATE_NORMAL && !self:IsMoving() && math.random (1, 3) == 1 then
-		self:VJ_ACT_PLAYACTIVITY("idle_alert_straight_05", true, math.Rand(1.5, 3), true) -- "idle_alert_straight_05", "idle_alert_straight_08"
+		self:PlayAnim("idle_alert_straight_05", true, math.Rand(1.5, 3), true) -- "idle_alert_straight_05", "idle_alert_straight_08"
 	end
 	self.Zombie_NoAlertAnimation = false
 end
@@ -207,13 +207,13 @@ function ENT:OnCallForHelp(ally, isFirst)
 	if !isFirst then return end
 	-- Play call for help anim only if its standing and is not busy with other activity
 	if self.Zombie_IdleState == IDLE_STATE_NORMAL && !self:BusyWithActivity() then
-		self:VJ_ACT_PLAYACTIVITY(self.ZombieAnim_CallHelp, true, math.Rand(1.5, 3), true)
+		self:PlayAnim(self.ZombieAnim_CallHelp, true, math.Rand(1.5, 3), true)
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnSetEnemyFromDamage(dmginfo, hitgroup)
 	if self.Zombie_IdleState == IDLE_STATE_NORMAL && math.random(1, 2) == 1 then
-		self:VJ_ACT_PLAYACTIVITY(animDmgSetEnemy, true, math.Rand(1.5, 3), true)
+		self:PlayAnim(animDmgSetEnemy, true, math.Rand(1.5, 3), true)
 		self.Zombie_NoAlertAnimation = true
 	end
 end
@@ -234,11 +234,11 @@ function ENT:OnThinkActive()
 			if math.random(1, 3) == 1 then
 				if math.random(1, 2) == 1 then
 					self.Zombie_IdleState = IDLE_STATE_SITTING
-					self:VJ_ACT_PLAYACTIVITY("standing_to_sitting03", true, false)
+					self:PlayAnim("standing_to_sitting03", true, false)
 				else
 					sitTime = math.Rand(30, 60)
 					self.Zombie_IdleState = IDLE_STATE_LYING
-					self:VJ_ACT_PLAYACTIVITY("standing_to_lying03", true, false)
+					self:PlayAnim("standing_to_lying03", true, false)
 				end
 				self:SetState(VJ_STATE_ONLY_ANIMATION, sitTime)
 				self.Zombie_IdleQuickStand = false
@@ -253,9 +253,9 @@ function ENT:OnThinkActive()
 			self:StopCurrentSchedule()
 		else
 			if self.Zombie_IdleState == IDLE_STATE_SITTING then
-				self:VJ_ACT_PLAYACTIVITY(quick and "sitting_to_standing_alert" or "sitting03_to_standing", true, false)
+				self:PlayAnim(quick and "sitting_to_standing_alert" or "sitting03_to_standing", true, false)
 			elseif self.Zombie_IdleState == IDLE_STATE_LYING then
-				self:VJ_ACT_PLAYACTIVITY(quick and "lying_to_standing_alert" or "lying03_to_standing", true, false)
+				self:PlayAnim(quick and "lying_to_standing_alert" or "lying03_to_standing", true, false)
 			end
 		end
 		self.Zombie_IdleState = IDLE_STATE_NORMAL
@@ -310,7 +310,7 @@ function ENT:OnThinkActive()
 						self:SetPos(finalpos)
 					end
 				end)
-				self:VJ_ACT_PLAYACTIVITY(anim,true,false/*self:DecideAnimationLength(anim,false,0.4)*/,true,0,{},function(sched)
+				self:PlayAnim(anim,true,false/*self:DecideAnimationLength(anim,false,0.4)*/,true,0,{},function(sched)
 					sched.RunCode_OnFinish = function()
 						//self:SetGroundEntity(NULL)
 						//self:SetPos(finalpos)
@@ -334,7 +334,7 @@ function ENT:OnDamaged(dmginfo, hitgroup, status)
 			if self:IsPlayingGesture(self.CurrentAttackAnimation) then -- Stop the attack gesture!
 				self:RemoveGesture(self.CurrentAttackAnimation)
 			end
-			self:VJ_ACT_PLAYACTIVITY("run_stumble_01", true, 2.4)
+			self:PlayAnim("run_stumble_01", true, 2.4)
 			self.Zombie_NextStumbleT = CurTime() + math.Rand(8, 14)
 		end
 	end

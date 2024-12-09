@@ -154,7 +154,7 @@ function ENT:OnThink()
 	for _,v in ipairs(self.Zombies) do
 		if IsValid(v) then
 			v:SetLastPosition(self:GetPos())
-			v:VJ_TASK_GOTO_LASTPOS()
+			v:SCHEDULE_GOTO_POSITION()
 		end
 	end
 end
