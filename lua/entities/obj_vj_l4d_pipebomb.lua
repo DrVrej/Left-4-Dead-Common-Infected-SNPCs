@@ -30,25 +30,17 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if !SERVER then return end
 
-ENT.Model = "models/cpthazama/l4d1/weapons/pipebomb.mdl" -- The models it should spawn with | Picks a random one from the table
-ENT.MoveCollideType = nil -- Move type | Some examples: MOVECOLLIDE_FLY_BOUNCE, MOVECOLLIDE_FLY_SLIDE
-ENT.CollisionGroupType = nil -- Collision type, recommended to keep it as it is
-ENT.SolidType = SOLID_VPHYSICS -- Solid type, recommended to keep it as it is
-ENT.RemoveOnHit = false -- Should it remove itself when it touches something? | It will run the hit sound, place a decal, etc.
-ENT.DecalTbl_DeathDecals = {"Scorch"}
-ENT.SoundTbl_OnCollide = {"weapons/hegrenade/he_bounce-1.wav"}
+ENT.Model = "models/cpthazama/l4d1/weapons/pipebomb.mdl" -- Model(s) to spawn with | Picks a random one if it's a table
+ENT.ProjectileType = VJ.PROJ_TYPE_PROP
+ENT.CollisionBehavior = VJ.PROJ_COLLISION_NONE
+ENT.CollisionDecals = "Scorch"
+ENT.SoundTbl_OnCollide = "weapons/hegrenade/he_bounce-1.wav"
 
 local sdExplosion = {"vj_l4d_com/pipe_bomb/explode3.wav", "vj_l4d_com/pipe_bomb/explode5.wav"}
 
 -- Custom
 ENT.FuseTime = 7
 ENT.Zombies = {}
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomPhysicsObjectOnInitialize(phys)
-	phys:Wake()
-	phys:EnableGravity(true)
-	phys:SetBuoyancyRatio(0)
-end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Init()
 	self:SetHealth(1)
@@ -61,7 +53,7 @@ function ENT:Init()
 	end
 	
 	-- Explosion sequence (Manual)
-	timer.Simple(self.FuseTime,function() if IsValid(self) then self:DeathEffects() end end)
+	timer.Simple(self.FuseTime,function() if IsValid(self) then self:Destroy() end end)
 	timer.Simple(0, function() if IsValid(self) then self:Beep(75) end end)
 	timer.Simple(1, function() if IsValid(self) then self:Beep(75) end end)
 	timer.Simple(2, function() if IsValid(self) then self:Beep(75) end end)
@@ -159,11 +151,11 @@ function ENT:OnThink()
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnTakeDamage(dmginfo)
+function ENT:OnDamaged(dmginfo)
 	self:GetPhysicsObject():AddVelocity(dmginfo:GetDamageForce() * 0.1)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnPhysicsCollide(data, phys)
+function ENT:OnCollision(data, phys)
 	local getVel = phys:GetVelocity()
 	local curVelSpeed = getVel:Length()
 	if curVelSpeed > 500 then -- Or else it will go flying!
@@ -171,14 +163,14 @@ function ENT:CustomOnPhysicsCollide(data, phys)
 	end
 	
 	if curVelSpeed > 100 then -- If the grenade is going faster than 100, then play the touch sound
-		self:OnCollideSoundCode()
+		self:PlaySound("OnCollide")
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 local defAng = Angle(0, 0, 0)
 local posUp100 = Vector(0, 0, 100)
 --
-function ENT:DeathEffects()
+function ENT:OnDestroy()
 	util.ScreenShake(self:GetPos(), 100, 200, 1, 2500)
 	util.BlastDamage(self, self:GetOwner() == NULL and self or self:GetOwner(), self:GetPos(), 450, 150)
 	
@@ -209,11 +201,9 @@ function ENT:DeathEffects()
 		endpos = self:GetPos() - posUp100,
 		filter = self
 	})
-	util.Decal(VJ.PICK(self.DecalTbl_DeathDecals), tr.HitPos+tr.HitNormal, tr.HitPos-tr.HitNormal)
+	util.Decal(VJ.PICK(self.CollisionDecals), tr.HitPos+tr.HitNormal, tr.HitPos-tr.HitNormal)
 	
 	-- Misc
 	self:EmitSound(VJ.PICK(sdExplosion), 90, 100)
-	self:DoDamageCode()
-	self:SetDeathVariablesTrue(nil, nil, false)
-	self:Remove()
+	self:DealDamage()
 end
