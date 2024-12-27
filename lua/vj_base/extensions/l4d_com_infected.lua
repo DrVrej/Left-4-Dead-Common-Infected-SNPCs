@@ -172,9 +172,9 @@ function ENT:OnInput(key, activator, caller, data)
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:GetSightDirection()
-	return self:GetAttachment(self:LookupAttachment("mouth")).Ang:Forward()
-end
+//function ENT:GetSightDirection()
+//	return self:GetAttachment(self:LookupAttachment("mouth")).Ang:Forward()
+//end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 local math_clamp = math.Clamp
 local math_appAngle = math.ApproachAngle
