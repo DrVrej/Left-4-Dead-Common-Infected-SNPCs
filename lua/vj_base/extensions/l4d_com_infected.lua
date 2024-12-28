@@ -342,7 +342,7 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnFlinch(dmginfo, hitgroup, status)
 	if status == "PriorExecution" then
-		return self:GetSequence() != self:LookupSequence("run_stumble_01") -- If we are stumbling then DO NOT flinch!
+		return self:GetSequence() == self:LookupSequence("run_stumble_01") -- If we are stumbling then DO NOT flinch!
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
