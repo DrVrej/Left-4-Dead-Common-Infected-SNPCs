@@ -7,7 +7,7 @@ ENT.IsVJL4DCommonInfected = true
 
 ENT.StartHealth = 65
 ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"} -- NPCs with the same class with be allied to each other
-ENT.BloodColor = "Red" -- The blood type, this will determine what it should use (decal, particle, etc.)
+ENT.BloodColor = VJ.BLOOD_COLOR_RED -- The blood type, this will determine what it should use (decal, particle, etc.)
 ENT.CustomBlood_Decal = {"VJ_L4D_Blood"} -- Decals to spawn when it's damaged
 ENT.PoseParameterLooking_Names = {pitch = {"body_pitch"}, yaw = {"body_yaw"}, roll = {}} -- Custom pose parameters to use, can put as many as needed
 ENT.HasBloodPool = false -- Does it have a blood pool?
