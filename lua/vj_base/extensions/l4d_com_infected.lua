@@ -19,7 +19,7 @@ ENT.TimeUntilMeleeAttackDamage = false -- This counted in seconds | This calcula
 ENT.SlowPlayerOnMeleeAttack = true -- If true, then the player will slow down
 ENT.SlowPlayerOnMeleeAttackTime = 0.5 -- How much time until player's Speed resets
 
-ENT.GibOnDeathDamagesTable = {"All"} -- Damages that it gibs from | "UseDefault" = Uses default damage types | "All" = Gib from any damage
+ENT.GibOnDeathFilter = false
 ENT.HasDeathAnimation = true -- Does it play an animation when it dies?
 ENT.AnimTbl_Death = {"death_01", "death_02a", "death_02c", "death_03", "death_05", "death_06", "death_07", "death_08", "death_08b", "death_09", "death_10ab", "death_10b", "death_10c", "death_11_01a", "death_11_01b", "death_11_02a", "death_11_02b", "death_11_02c", "death_11_02d", "death_11_03a", "death_11_03b", "death_11_03c"}
 ENT.DeathAnimationChance = 2 -- Put 1 if you want it to play the animation all the time
@@ -346,8 +346,8 @@ function ENT:OnFlinch(dmginfo, hitgroup, status)
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:SetUpGibesOnDeath(dmginfo, hitgroup)
-	if self:IsDefaultGibDamageType(dmginfo:GetDamageType()) then self.HasDeathAnimation = false return end
+function ENT:HandleGibOnDeath(dmginfo, hitgroup)
+	if self:IsGibDamage(dmginfo:GetDamageType()) then self.HasDeathAnimation = false return end
 	if dmginfo:GetDamageForce():Length() < 600 then return false end
 	
 	local playDeathAnim = true
@@ -392,16 +392,12 @@ function ENT:SetUpGibesOnDeath(dmginfo, hitgroup)
 	else
 		return false
 	end
-	return true, {DeathAnim = playDeathAnim, AllowCorpse = true} -- Return to true if it gibbed!
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomGibOnDeathSounds(dmginfo, hitgroup)
 	if hitgroup == HITGROUP_HEAD then
-		VJ.EmitSound(self, sdGoreHead, 90, math.random(80, 100))
+		self:PlaySoundSystem("Gib", sdGoreHead)
 	else
-		VJ.EmitSound(self, sdGoreReg, 90, math.random(80, 100))
+		self:PlaySoundSystem("Gib", sdGoreReg)
 	end
-	return false
+	return true, {AllowCorpse = true, AllowAnim = playDeathAnim, AllowSound = false}
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDeath(dmginfo, hitgroup, status)
