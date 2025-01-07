@@ -33,7 +33,7 @@ if !SERVER then return end
 ENT.Model = "models/cpthazama/l4d1/weapons/pipebomb.mdl" -- Model(s) to spawn with | Picks a random one if it's a table
 ENT.ProjectileType = VJ.PROJ_TYPE_PROP
 ENT.CollisionBehavior = VJ.PROJ_COLLISION_NONE
-ENT.CollisionDecals = "Scorch"
+ENT.CollisionDecal = "Scorch"
 ENT.SoundTbl_OnCollide = "weapons/hegrenade/he_bounce-1.wav"
 
 local sdExplosion = {"vj_l4d_com/pipe_bomb/explode3.wav", "vj_l4d_com/pipe_bomb/explode5.wav"}
@@ -201,7 +201,7 @@ function ENT:OnDestroy()
 		endpos = self:GetPos() - posUp100,
 		filter = self
 	})
-	util.Decal(VJ.PICK(self.CollisionDecals), tr.HitPos+tr.HitNormal, tr.HitPos-tr.HitNormal)
+	util.Decal(VJ.PICK(self.CollisionDecal), tr.HitPos+tr.HitNormal, tr.HitPos-tr.HitNormal)
 	
 	-- Misc
 	self:EmitSound(VJ.PICK(sdExplosion), 90, 100)
