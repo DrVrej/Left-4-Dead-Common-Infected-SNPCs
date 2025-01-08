@@ -20,12 +20,7 @@ ENT.VJ_ID_Attackable = true
 ENT.VJ_ID_Grenade = true
 
 if CLIENT then
-	local Name = "Pipe Bomb"
-	local LangName = "obj_vj_l4d_pipebomb"
-	language.Add(LangName, Name)
-	killicon.Add(LangName,"HUD/killicons/default",Color(255,80,0,255))
-	language.Add("#"..LangName, Name)
-	killicon.Add("#"..LangName,"HUD/killicons/default",Color(255,80,0,255))
+	VJ.AddKillIcon("obj_vj_l4d_pipebomb", ENT.PrintName, VJ.KILLICON_GRENADE)
 end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if !SERVER then return end
