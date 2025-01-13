@@ -54,7 +54,7 @@ function ENT:OnDamaged(dmginfo, hitgroup, status)
 		//spark:SetAngles(dmginfo:GetDamagePosition():Angle())
 		//spark:SetScale(0.1)
 		//util.Effect("StunstickImpact", spark)
-		if self.HasSounds && self.HasImpactSounds then VJ.EmitSound(self, "vj_base/impact/armor"..math.random(1, 10)..".wav", 70) end
+		if self.HasSounds && self.HasImpactSounds then VJ.EmitSound(self, "VJ.Impact.Armor") end
 	end
 	orgDmgFunc(self, dmginfo, hitgroup, status)
 end
