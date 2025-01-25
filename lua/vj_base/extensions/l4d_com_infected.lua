@@ -6,31 +6,31 @@
 ENT.IsVJL4DCommonInfected = true
 
 ENT.StartHealth = 65
-ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"} -- NPCs with the same class with be allied to each other
+ENT.VJ_NPC_Class = {"CLASS_ZOMBIE"}
 ENT.BloodColor = VJ.BLOOD_COLOR_RED
 ENT.BloodDecal = {"VJ_L4D_Blood"}
-ENT.PoseParameterLooking_Names = {pitch = {"body_pitch"}, yaw = {"body_yaw"}, roll = {}} -- Custom pose parameters to use, can put as many as needed
+ENT.PoseParameterLooking_Names = {pitch = {"body_pitch"}, yaw = {"body_yaw"}, roll = {}}
 ENT.HasBloodPool = false
 
-ENT.HasMeleeAttack = true -- Can this NPC melee attack?
+ENT.HasMeleeAttack = true
 ENT.MeleeAttackDamage = 10
 ENT.AnimTbl_MeleeAttack = "vjges_"..ACT_MELEE_ATTACK2
-ENT.TimeUntilMeleeAttackDamage = false -- This counted in seconds | This calculates the time until it hits something
-ENT.SlowPlayerOnMeleeAttack = true -- If true, then the player will slow down
-ENT.SlowPlayerOnMeleeAttackTime = 0.5 -- How much time until player's Speed resets
+ENT.TimeUntilMeleeAttackDamage = false
+ENT.SlowPlayerOnMeleeAttack = true
+ENT.SlowPlayerOnMeleeAttackTime = 0.5
 
 ENT.GibOnDeathFilter = false
-ENT.HasDeathAnimation = true -- Does it play an animation when it dies?
+ENT.HasDeathAnimation = true
 ENT.AnimTbl_Death = {"death_01", "death_02a", "death_02c", "death_03", "death_05", "death_06", "death_07", "death_08", "death_08b", "death_09", "death_10ab", "death_10b", "death_10c", "death_11_01a", "death_11_01b", "death_11_02a", "death_11_02b", "death_11_02c", "death_11_02d", "death_11_03a", "death_11_03b", "death_11_03c"}
-ENT.DeathAnimationChance = 2 -- Put 1 if you want it to play the animation all the time
+ENT.DeathAnimationChance = 2
 
-ENT.DisableFootStepSoundTimer = true -- If set to true, it will disable the time system for the footstep sound code, allowing you to use other ways like model events
-ENT.HasExtraMeleeAttackSounds = true -- Set to true to use the extra melee attack sounds
-ENT.HasMeleeAttackSlowPlayerSound = false -- Does it have a sound when it slows down the player?
-	-- ====== Flinching Code ====== --
-ENT.CanFlinch = 1 -- 0 = Don't flinch | 1 = Flinch at any damage | 2 = Flinch only from certain damages
-ENT.FlinchChance = 12 -- Chance of it flinching from 1 to x | 1 will make it always flinch
-ENT.AnimTbl_Flinch = "Shoved_Backward_01" // "vjges_flinch_01" -- The regular flinch animations to play
+ENT.DisableFootStepSoundTimer = true
+ENT.HasExtraMeleeAttackSounds = true
+ENT.HasMeleeAttackSlowPlayerSound = false
+
+ENT.CanFlinch = 1
+ENT.FlinchChance = 12
+ENT.AnimTbl_Flinch = "Shoved_Backward_01" // "vjges_flinch_01"
 ENT.HitGroupFlinching_Values = {
 	{HitGroup = {HITGROUP_HEAD}, Animation = {"HeadshotFront"}},
 	//{HitGroup = {HITGROUP_CHEST, HITGROUP_STOMACH}, Animation = {"Shoved_Backward_01"}} -- Since there isn't any animation for legs or arms, just use this as general anim
@@ -358,7 +358,7 @@ function ENT:HandleGibOnDeath(dmginfo, hitgroup)
 			self.SoundTbl_Death = sdGoreHeadDeath
 			self:RemoveAllDecals()
 			self:Zombie_Gibs("h")
-			if self.HasGibOnDeathEffects == true then
+			if self.HasGibOnDeathEffects then
 				local bloodSpray = ents.Create("info_particle_system")
 				bloodSpray:SetKeyValue("effect_name", "blood_advisor_puncture_withdraw")
 				bloodSpray:SetPos(attachHead.Pos)
