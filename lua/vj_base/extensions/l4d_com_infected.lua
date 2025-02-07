@@ -331,8 +331,8 @@ function ENT:OnDamaged(dmginfo, hitgroup, status)
 		
 		-- Randomly stumble when damaged while running
 		if !self.Flinching && !self:IsOnFire() && self:IsMoving() && self:GetActivity() == ACT_RUN && self.Zombie_NextStumbleT < CurTime() && math.random(1, 16) == 1 then
-			if self:IsPlayingGesture(self.CurrentAttackAnimation) then -- Stop the attack gesture!
-				self:RemoveGesture(self.CurrentAttackAnimation)
+			if self:IsPlayingGesture(self.AttackAnim) then -- Stop the attack gesture!
+				self:RemoveGesture(self.AttackAnim)
 			end
 			self:PlayAnim("run_stumble_01", true, 2.4)
 			self.Zombie_NextStumbleT = CurTime() + math.Rand(8, 14)
