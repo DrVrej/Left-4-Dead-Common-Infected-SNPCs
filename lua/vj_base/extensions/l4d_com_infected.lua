@@ -206,7 +206,7 @@ end
 function ENT:OnCallForHelp(ally, isFirst)
 	if !isFirst then return end
 	-- Play call for help anim only if its standing and is not busy with other activity
-	if self.Zombie_IdleState == IDLE_STATE_NORMAL && !self:BusyWithActivity() then
+	if self.Zombie_IdleState == IDLE_STATE_NORMAL && !self:IsBusy("Activities") then
 		self:PlayAnim(self.ZombieAnim_CallHelp, true, math.Rand(1.5, 3), true)
 	end
 end
