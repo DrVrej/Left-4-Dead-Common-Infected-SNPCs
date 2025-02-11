@@ -164,7 +164,7 @@ end
 function ENT:OnInput(key, activator, caller, data)
 	//print("OnInput: ", key, activator, caller, data)
 	if key == "event_emit step" then
-		self:FootStepSoundCode()
+		self:PlayFootstepSound()
 	elseif key == "event_mattack" then
 		self:MeleeAttackCode()
 	elseif key == "event_vomit" && self.Zombie_CanPuke == true then
