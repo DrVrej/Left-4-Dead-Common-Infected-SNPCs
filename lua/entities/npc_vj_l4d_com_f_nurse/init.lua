@@ -6,7 +6,7 @@ include("shared.lua")
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = "models/cpthazama/l4d1/common/common_female_nurse01.mdl" -- Model(s) to spawn with | Picks a random one if it's a table
+ENT.Model = "models/cpthazama/l4d1/common/common_female_nurse01.mdl"
 ENT.Zombie_Gender = 1
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Zombie_CustomOnInitialize()

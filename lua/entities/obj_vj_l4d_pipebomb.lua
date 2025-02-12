@@ -25,7 +25,7 @@ end
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if !SERVER then return end
 
-ENT.Model = "models/cpthazama/l4d1/weapons/pipebomb.mdl" -- Model(s) to spawn with | Picks a random one if it's a table
+ENT.Model = "models/cpthazama/l4d1/weapons/pipebomb.mdl"
 ENT.ProjectileType = VJ.PROJ_TYPE_PROP
 ENT.CollisionBehavior = VJ.PROJ_COLLISION_NONE
 ENT.CollisionDecal = "Scorch"

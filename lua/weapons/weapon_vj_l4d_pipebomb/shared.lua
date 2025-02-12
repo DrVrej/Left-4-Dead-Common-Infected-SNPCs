@@ -47,7 +47,7 @@ SWEP.NextIdle_Deploy = 0.35 -- How much time until it plays the idle animation a
 SWEP.NextIdle_PrimaryAttack = 1.3 -- How much time until it plays the idle animation after attacking(Primary)
 	-- Reload Settings ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.AnimTbl_Reload = ACT_VM_DRAW
-SWEP.Reload_TimeUntilAmmoIsSet = 1 -- Time until ammo is set to the weapon
+SWEP.Reload_TimeUntilAmmoIsSet = 1
 	-- World Model ---------------------------------------------------------------------------------------------------------------------------------------------
 SWEP.WorldModel_UseCustomPosition = true -- Should the gun use custom position? This can be used to fix guns that are in the crotch
 SWEP.WorldModel_CustomPositionAngle = Vector(0, 0, 180)

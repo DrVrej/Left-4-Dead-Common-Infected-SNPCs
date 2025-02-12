@@ -35,7 +35,7 @@ ENT.HitGroupFlinching_Values = {
 	{HitGroup = {HITGROUP_HEAD}, Animation = {"HeadshotFront"}},
 	//{HitGroup = {HITGROUP_CHEST, HITGROUP_STOMACH}, Animation = {"Shoved_Backward_01"}} -- Since there isn't any animation for legs or arms, just use this as general anim
 }
-	-- ====== Sound Paths ====== --
+
 ENT.SoundTbl_FootStep = {"vj_l4d_com/footstep/dirt1.wav", "vj_l4d_com/footstep/dirt2.wav", "vj_l4d_com/footstep/dirt3.wav", "vj_l4d_com/footstep/dirt4.wav"}
 ENT.SoundTbl_Breath = {"vj_l4d_com/idle_breath/breathing01.wav", "vj_l4d_com/idle_breath/breathing08.wav", "vj_l4d_com/idle_breath/breathing09.wav", "vj_l4d_com/idle_breath/breathing10.wav", "vj_l4d_com/idle_breath/breathing13.wav", "vj_l4d_com/idle_breath/breathing16.wav", "vj_l4d_com/idle_breath/breathing18.wav", "vj_l4d_com/idle_breath/breathing25.wav", "vj_l4d_com/idle_breath/breathing26.wav", "vj_l4d_com/idle_breath/idle_breath_01.wav", "vj_l4d_com/idle_breath/idle_breath_02.wav", "vj_l4d_com/idle_breath/idle_breath_03.wav", "vj_l4d_com/idle_breath/idle_breath_04.wav", "vj_l4d_com/idle_breath/idle_breath_06.wav"}
 ENT.SoundTbl_Idle = {"vj_l4d_com/idle/mumbling01.wav", "vj_l4d_com/idle/mumbling02.wav", "vj_l4d_com/idle/mumbling03.wav", "vj_l4d_com/idle/mumbling04.wav", "vj_l4d_com/idle/mumbling05.wav", "vj_l4d_com/idle/mumbling06.wav", "vj_l4d_com/idle/mumbling07.wav", "vj_l4d_com/idle/mumbling08.wav", "vj_l4d_com/idle/moan01.wav", "vj_l4d_com/idle/moan02.wav", "vj_l4d_com/idle/moan03.wav", "vj_l4d_com/idle/moan04.wav", "vj_l4d_com/idle/moan05.wav", "vj_l4d_com/idle/moan06.wav", "vj_l4d_com/idle/moan07.wav", "vj_l4d_com/idle/moan08.wav", "vj_l4d_com/idle/moan09.wav"}
@@ -166,7 +166,7 @@ function ENT:OnInput(key, activator, caller, data)
 	if key == "event_emit step" then
 		self:PlayFootstepSound()
 	elseif key == "event_mattack" then
-		self:MeleeAttackCode()
+		self:ExecuteMeleeAttack()
 	elseif key == "event_vomit" && self.Zombie_CanPuke == true then
 		ParticleEffectAttach("vj_l4d_vomit", PATTACH_POINT_FOLLOW, self, 9)
 	end
@@ -284,20 +284,20 @@ function ENT:OnThinkActive()
 			if IsValid(tr5.Entity) then
 				local tr5b = util.TraceLine({start = self:GetPos() + self:GetUp()*160, endpos = self:GetPos() + self:GetUp()*160 + self:GetForward()*40, filter = function(ent) if (ent:GetClass() == "prop_physics") then return true end end})
 				if !IsValid(tr5b.Entity) then
-					anim = VJ.PICK({"vjseq_climb144_00_inplace","vjseq_climb144_00a_inplace","vjseq_climb144_01_inplace","vjseq_climb144_03_inplace","vjseq_climb144_03a_inplace","vjseq_climb144_04_inplace"})
+					anim = VJ.PICK({"vjseq_climb144_00_inplace", "vjseq_climb144_00a_inplace", "vjseq_climb144_01_inplace", "vjseq_climb144_03_inplace", "vjseq_climb144_03a_inplace", "vjseq_climb144_04_inplace"})
 					finalpos = tr5.HitPos
 				end
 			elseif IsValid(tr4.Entity) then
-				anim = VJ.PICK({"vjseq_climb120_00_inplace","vjseq_climb120_00a_inplace","vjseq_climb120_01_inplace","vjseq_climb120_03_inplace","vjseq_climb120_03a_inplace","vjseq_climb120_04_inplace"})
+				anim = VJ.PICK({"vjseq_climb120_00_inplace", "vjseq_climb120_00a_inplace", "vjseq_climb120_01_inplace", "vjseq_climb120_03_inplace", "vjseq_climb120_03a_inplace", "vjseq_climb120_04_inplace"})
 				finalpos = tr4.HitPos
 			elseif IsValid(tr3.Entity) then
-				anim = VJ.PICK({"vjseq_climb96_00_inplace","vjseq_climb96_00a_inplace","vjseq_climb96_03_inplace","vjseq_climb96_03a_inplace","vjseq_climb96_04a_inplace","vjseq_climb96_05_inplace"})
+				anim = VJ.PICK({"vjseq_climb96_00_inplace", "vjseq_climb96_00a_inplace", "vjseq_climb96_03_inplace", "vjseq_climb96_03a_inplace", "vjseq_climb96_04a_inplace", "vjseq_climb96_05_inplace"})
 				finalpos = tr3.HitPos
 			elseif IsValid(tr2.Entity) then
-				anim = VJ.PICK({"vjseq_climb72_03_inplace","vjseq_climb72_04_inplace","vjseq_climb72_05_inplace","vjseq_climb72_06_inplace","vjseq_climb72_07_inplace"})
+				anim = VJ.PICK({"vjseq_climb72_03_inplace", "vjseq_climb72_04_inplace", "vjseq_climb72_05_inplace", "vjseq_climb72_06_inplace", "vjseq_climb72_07_inplace"})
 				finalpos = tr2.HitPos
 			elseif IsValid(tr1.Entity) then
-				anim = VJ.PICK({"vjseq_climb48_01_inplace","vjseq_climb48_02_inplace","vjseq_climb48_03_inplace","vjseq_climb48_04_inplace"})
+				anim = VJ.PICK({"vjseq_climb48_01_inplace", "vjseq_climb48_02_inplace", "vjseq_climb48_03_inplace", "vjseq_climb48_04_inplace"})
 				finalpos = tr1.HitPos
 			end
 		

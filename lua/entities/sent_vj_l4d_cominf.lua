@@ -19,7 +19,7 @@ ENT.AdminSpawnable	= false
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if !SERVER then return end
 
-ENT.SingleSpawner = true -- If set to true, it will spawn the entities once then remove itself
+ENT.SingleSpawner = true
 ENT.EntitiesToSpawn = {
 	{Entities = {
 			"npc_vj_l4d_com_male",

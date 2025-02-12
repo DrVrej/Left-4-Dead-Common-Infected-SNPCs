@@ -6,7 +6,7 @@ include("shared.lua")
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
-ENT.Model = "models/cpthazama/l4d1/common/common_military_male01.mdl" -- Model(s) to spawn with | Picks a random one if it's a table
+ENT.Model = "models/cpthazama/l4d1/common/common_military_male01.mdl"
 ENT.StartHealth = 80
 
 ENT.SoundTbl_FootStep = {"vj_l4d_com/footstep/concrete1.wav", "vj_l4d_com/footstep/concrete2.wav", "vj_l4d_com/footstep/concrete3.wav", "vj_l4d_com/footstep/concrete4.wav"}
