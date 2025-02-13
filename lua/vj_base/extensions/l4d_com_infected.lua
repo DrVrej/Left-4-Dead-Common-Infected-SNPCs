@@ -14,7 +14,7 @@ ENT.HasBloodPool = false
 
 ENT.HasMeleeAttack = true
 ENT.MeleeAttackDamage = 10
-ENT.AnimTbl_MeleeAttack = "vjges_"..ACT_MELEE_ATTACK2
+ENT.AnimTbl_MeleeAttack = "vjges_" .. ACT_MELEE_ATTACK2
 ENT.TimeUntilMeleeAttackDamage = false
 ENT.SlowPlayerOnMeleeAttack = true
 ENT.SlowPlayerOnMeleeAttackTime = 0.5
@@ -28,7 +28,7 @@ ENT.DisableFootStepSoundTimer = true
 ENT.HasExtraMeleeAttackSounds = true
 ENT.HasMeleeAttackSlowPlayerSound = false
 
-ENT.CanFlinch = 1
+ENT.CanFlinch = true
 ENT.FlinchChance = 12
 ENT.AnimTbl_Flinch = "Shoved_Backward_01" // "vjges_flinch_01"
 ENT.HitGroupFlinching_Values = {
