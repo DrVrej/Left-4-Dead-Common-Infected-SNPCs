@@ -11,7 +11,7 @@ ENT.CanGib = false
 
 ENT.SoundTbl_FootStep = {"vj_l4d_com/footstep/clown/concrete1.wav", "vj_l4d_com/footstep/clown/concrete2.wav", "vj_l4d_com/footstep/clown/concrete3.wav", "vj_l4d_com/footstep/clown/concrete4.wav", "vj_l4d_com/footstep/clown/concrete5.wav", "vj_l4d_com/footstep/clown/concrete6.wav", "vj_l4d_com/footstep/clown/concrete7.wav", "vj_l4d_com/footstep/clown/concrete8.wav"}
 
-ENT.FootStepSoundLevel = 80
+ENT.FootstepSoundLevel = 80
 
 local defPos = Vector(0, 0, 0)
 ---------------------------------------------------------------------------------------------------------------------------------------------

@@ -11,7 +11,7 @@ ENT.StartHealth = 80
 
 ENT.SoundTbl_FootStep = {"vj_l4d_com/footstep/concrete1.wav", "vj_l4d_com/footstep/concrete2.wav", "vj_l4d_com/footstep/concrete3.wav", "vj_l4d_com/footstep/concrete4.wav"}
 
-ENT.FootStepSoundLevel = 80
+ENT.FootstepSoundLevel = 80
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Zombie_CustomOnInitialize()
 	self:SetBodygroup(0, math.random(0, 3))

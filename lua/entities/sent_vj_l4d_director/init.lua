@@ -491,7 +491,7 @@ function ENT:SpawnInfected(ent,pos,isMob)
 	table_insert(self.tbl_SpawnedNPCs,infected)
 	if isMob then
 		infected.SightAngle = 360
-		infected.FindEnemy_CanSeeThroughWalls = true
+		infected.EnemyXRayDetection = true
 		infected:DrawShadow(false)
 		timer.Simple(0,function()
 			if IsValid(infected) then
@@ -520,7 +520,7 @@ function ENT:SpawnSpecialInfected(ent,pos)
 	infected:Spawn()
 	infected:SetGhost(true)
 	infected.SightAngle = 360
-	infected.FindEnemy_CanSeeThroughWalls = true
+	infected.EnemyXRayDetection = true
 	table_insert(self.tbl_SpawnedSpecialInfected,infected)
 	infected.AI_Director = self
 	infected.EntitiesToNoCollide = {}

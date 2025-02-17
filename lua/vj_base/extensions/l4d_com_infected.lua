@@ -16,8 +16,8 @@ ENT.HasMeleeAttack = true
 ENT.MeleeAttackDamage = 10
 ENT.AnimTbl_MeleeAttack = "vjges_" .. ACT_MELEE_ATTACK2
 ENT.TimeUntilMeleeAttackDamage = false
-ENT.SlowPlayerOnMeleeAttack = true
-ENT.SlowPlayerOnMeleeAttackTime = 0.5
+ENT.MeleeAttackPlayerSpeed = true
+ENT.MeleeAttackPlayerSpeedTime = 0.5
 
 ENT.GibOnDeathFilter = false
 ENT.HasDeathAnimation = true
@@ -31,7 +31,7 @@ ENT.HasMeleeAttackSlowPlayerSound = false
 ENT.CanFlinch = true
 ENT.FlinchChance = 12
 ENT.AnimTbl_Flinch = "Shoved_Backward_01" // "vjges_flinch_01"
-ENT.HitGroupFlinching_Values = {
+ENT.FlinchHitGroupMap = {
 	{HitGroup = {HITGROUP_HEAD}, Animation = {"HeadshotFront"}},
 	//{HitGroup = {HITGROUP_CHEST, HITGROUP_STOMACH}, Animation = {"Shoved_Backward_01"}} -- Since there isn't any animation for legs or arms, just use this as general anim
 }
