@@ -26,7 +26,7 @@ ENT.DeathAnimationChance = 2
 
 ENT.DisableFootStepSoundTimer = true
 ENT.HasExtraMeleeAttackSounds = true
-ENT.HasMeleeAttackSlowPlayerSound = false
+ENT.HasMeleeAttackPlayerSpeedSounds = false
 
 ENT.CanFlinch = true
 ENT.FlinchChance = 12
