@@ -341,7 +341,7 @@ function ENT:OnDamaged(dmginfo, hitgroup, status)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnFlinch(dmginfo, hitgroup, status)
-	if status == "PriorExecution" then
+	if status == "Init" then
 		return self:GetSequence() == self:LookupSequence("run_stumble_01") -- If we are stumbling then DO NOT flinch!
 	end
 end
@@ -401,7 +401,7 @@ function ENT:HandleGibOnDeath(dmginfo, hitgroup)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDeath(dmginfo, hitgroup, status)
-	if status == "Initial" && self.Zombie_IsClimbing or self.Zombie_IdleState != IDLE_STATE_NORMAL or self:IsOnFire() or self:GetSequence() == self:LookupSequence("run_stumble_01") then
+	if status == "Init" && self.Zombie_IsClimbing or self.Zombie_IdleState != IDLE_STATE_NORMAL or self:IsOnFire() or self:GetSequence() == self:LookupSequence("run_stumble_01") then
 		self.HasDeathAnimation = false
 	elseif status == "DeathAnim" then
 		if /*dmginfo:GetDamageForce():Length() > 10000 or*/ bit.band(dmginfo:GetDamageType(), DMG_BUCKSHOT) != 0 then -- This is rarely ran...

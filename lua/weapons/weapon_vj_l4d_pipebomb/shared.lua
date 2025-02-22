@@ -66,7 +66,7 @@ function SWEP:Init()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function SWEP:OnPrimaryAttack(status, statusData)
-	if status == "Initial" then
+	if status == "Init" then
 		if CLIENT then return end
 		timer.Simple(1.3, function()
 			local owner = self:GetOwner()
