@@ -11,9 +11,6 @@ ENT.PrintName 		= "Random Common Infected Spawner"
 ENT.Author 			= "DrVrej"
 ENT.Contact 		= "http://steamcommunity.com/groups/vrejgaming"
 ENT.Category		= "VJ Base Spawners"
-
-ENT.Spawnable		= false
-ENT.AdminSpawnable	= false
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 if !SERVER then return end
 

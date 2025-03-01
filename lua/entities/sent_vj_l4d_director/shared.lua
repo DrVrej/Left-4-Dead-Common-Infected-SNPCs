@@ -5,9 +5,6 @@ ENT.Author			= "Cpt. Hazama"
 ENT.Contact 		= "http://steamcommunity.com/groups/vrejgaming"
 ENT.Category		= "Left 4 Dead"
 
-ENT.Spawnable		= false
-ENT.AdminSpawnable	= false
-
 if CLIENT then
 	function ENT:Draw()
 		return false

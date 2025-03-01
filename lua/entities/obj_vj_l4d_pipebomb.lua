@@ -11,9 +11,7 @@ ENT.PrintName		= "Pipe Bomb"
 ENT.Author 			= "DrVrej"
 ENT.Contact 		= "http://steamcommunity.com/groups/vrejgaming"
 ENT.Category		= "VJ Base"
-
-ENT.Spawnable = true
-ENT.AdminOnly = false
+ENT.Spawnable		= true
 
 ENT.VJ_ID_Attackable = true
 ENT.VJ_ID_Grenade = true
