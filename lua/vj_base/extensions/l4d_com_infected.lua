@@ -277,8 +277,8 @@ function ENT:OnThinkActive()
 		local tr1 = util.TraceLine({start = self:GetPos() + self:GetUp()*48, endpos = self:GetPos() + self:GetUp()*48 + self:GetForward()*40, filter = function(ent) if (ent:GetClass() == "prop_physics") then return true end end}) -- 48
 		local tru = util.TraceLine({start = self:GetPos(), endpos = self:GetPos() + self:GetUp()*200, filter = self})
 		
-		//VJ.DEBUG_TempEnt(tru.StartPos,self:GetAngles(),Color(0,0,255))
-		//VJ.DEBUG_TempEnt(tru.HitPos,self:GetAngles(),Color(0,255,0))
+		//VJ.DEBUG_TempEnt(tru.StartPos, self:GetAngles(), Color(0, 0, 255))
+		//VJ.DEBUG_TempEnt(tru.HitPos, self:GetAngles(), Color(0, 255, 0))
 		//PrintTable(tr2)
 		if !IsValid(tru.Entity) then
 			if IsValid(tr5.Entity) then
@@ -305,12 +305,12 @@ function ENT:OnThinkActive()
 				//print(anim)
 				self:SetGroundEntity(NULL)
 				self.Zombie_IsClimbing = true
-				timer.Simple(0.4,function()
+				timer.Simple(0.4, function()
 					if IsValid(self) then
 						self:SetPos(finalpos)
 					end
 				end)
-				self:PlayAnim(anim,true,false/*self:DecideAnimationLength(anim,false,0.4)*/,true,0,{},function(sched)
+				self:PlayAnim(anim, true, false/*self:DecideAnimationLength(anim, false, 0.4)*/, true, 0, {}, function(sched)
 					sched.RunCode_OnFinish = function()
 						//self:SetGroundEntity(NULL)
 						//self:SetPos(finalpos)

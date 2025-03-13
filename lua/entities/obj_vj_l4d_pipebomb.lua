@@ -45,7 +45,7 @@ function ENT:Init()
 	end
 	
 	-- Explosion sequence (Manual)
-	timer.Simple(self.FuseTime,function() if IsValid(self) then self:Destroy() end end)
+	timer.Simple(self.FuseTime, function() if IsValid(self) then self:Destroy() end end)
 	timer.Simple(0, function() if IsValid(self) then self:Beep(75) end end)
 	timer.Simple(1, function() if IsValid(self) then self:Beep(75) end end)
 	timer.Simple(2, function() if IsValid(self) then self:Beep(75) end end)
@@ -67,16 +67,16 @@ function ENT:Init()
 	timer.Simple(6.9, function() if IsValid(self) then self:Beep(90) end end)
 	
 	local glowFuse = ents.Create("env_sprite")
-	glowFuse:SetKeyValue("model","sprites/glow1.vmt")
-	glowFuse:SetKeyValue("scale","0.1")
-	glowFuse:SetKeyValue("rendermode","5")
-	glowFuse:SetKeyValue("rendercolor","255 191 0")
-	glowFuse:SetKeyValue("spawnflags","1")
+	glowFuse:SetKeyValue("model", "sprites/glow1.vmt")
+	glowFuse:SetKeyValue("scale", "0.1")
+	glowFuse:SetKeyValue("rendermode", "5")
+	glowFuse:SetKeyValue("rendercolor", "255 191 0")
+	glowFuse:SetKeyValue("spawnflags", "1")
 	glowFuse:SetPos(self:GetPos())
 	glowFuse:SetParent(self)
 	glowFuse:Spawn()
 	glowFuse:Activate()
-	glowFuse:Fire("SetParentAttachment","fuse")
+	glowFuse:Fire("SetParentAttachment", "fuse")
 	self:DeleteOnRemove(glowFuse)
 	
 	local redGlow = ents.Create("env_sprite")
@@ -107,7 +107,7 @@ function ENT:Init()
 	redLight:Spawn()
 	redLight:Activate()
 	redLight:Fire("TurnOn", "", 0)
-	redLight:Fire("SetParentAttachment","fuse")
+	redLight:Fire("SetParentAttachment", "fuse")
 	self:DeleteOnRemove(redLight)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -115,11 +115,11 @@ function ENT:Beep(vol)
 	self:EmitSound("vj_l4d_com/pipe_bomb/beep.wav", vol, 100)
 	
 	local glow = ents.Create("env_sprite")
-	glow:SetKeyValue("model","sprites/glow1.vmt")
-	glow:SetKeyValue("scale","0.115")
-	glow:SetKeyValue("rendermode","5")
-	glow:SetKeyValue("rendercolor","255 0 0")
-	glow:SetKeyValue("spawnflags","1")
+	glow:SetKeyValue("model", "sprites/glow1.vmt")
+	glow:SetKeyValue("scale", "0.115")
+	glow:SetKeyValue("rendermode", "5")
+	glow:SetKeyValue("rendercolor", "255 0 0")
+	glow:SetKeyValue("spawnflags", "1")
 	glow:SetPos(self:GetPos())
 	glow:SetParent(self)
 	glow:Spawn()
@@ -135,7 +135,7 @@ function ENT:Beep(vol)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnThink()
-	for _,v in ipairs(self.Zombies) do
+	for _, v in ipairs(self.Zombies) do
 		if IsValid(v) then
 			v:SetLastPosition(self:GetPos())
 			v:SCHEDULE_GOTO_POSITION()
@@ -187,7 +187,7 @@ function ENT:OnDestroy()
 	self:DeleteOnRemove(expLight)
 	
 	-- Decal
-	self:SetLocalPos(Vector(self:GetPos().x,self:GetPos().y,self:GetPos().z +4)) -- Because the entity is too close to the ground
+	self:SetLocalPos(Vector(self:GetPos().x, self:GetPos().y, self:GetPos().z +4)) -- Because the entity is too close to the ground
 	local tr = util.TraceLine({
 		start = self:GetPos(),
 		endpos = self:GetPos() - posUp100,
