@@ -266,7 +266,7 @@ function ENT:OnThinkActive()
 	-- Experimental Climbing System (Very old!)
 	//print(self:GetBlockingEntity())
 	// IsValid(self:GetBlockingEntity()) && !self:GetBlockingEntity():IsNPC() && !self:GetBlockingEntity():IsPlayer()
-	if self.Zombie_CanClimb == true && self.Dead == false && self.Zombie_IsClimbing == false && CurTime() > self.Zombie_NextClimbT then
+	if self.Zombie_CanClimb && !self.Dead && !self.Zombie_IsClimbing && CurTime() > self.Zombie_NextClimbT then
 		//print("-------------------------------------------------------------------------------------")
 		local anim = false
 		local finalpos = self:GetPos()
@@ -310,7 +310,7 @@ function ENT:OnThinkActive()
 						self:SetPos(finalpos)
 					end
 				end)
-				self:PlayAnim(anim, true, false/*self:DecideAnimationLength(anim, false, 0.4)*/, true, 0, {}, function(sched)
+				self:PlayAnim(anim, true, false, true, 0, {}, function(sched)
 					sched.RunCode_OnFinish = function()
 						//self:SetGroundEntity(NULL)
 						//self:SetPos(finalpos)
