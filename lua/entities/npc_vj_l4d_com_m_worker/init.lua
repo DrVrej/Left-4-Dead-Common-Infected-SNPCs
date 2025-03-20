@@ -9,7 +9,7 @@ include("shared.lua")
 ENT.Model = {"models/cpthazama/l4d2/common/common_male_roadcrew.mdl", "models/cpthazama/l4d2/common/common_male_roadcrew_rain.mdl"}
 ENT.CanGib = false
 
-ENT.Zombie_CanHearPipe = false -- Can it hear the pipe bombs?
+ENT.Zombie_CanHearPipe = false
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Zombie_CustomOnInitialize()
 	self:SetBodygroup(1, math.random(0, 6))

@@ -59,10 +59,11 @@ function ENT:OnDamaged(dmginfo, hitgroup, status)
 	orgDmgFunc(self, dmginfo, hitgroup, status)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:OnCreateDeathCorpse(dmginfo, hitgroup, corpseEnt)
-	if IsValid(self.MaskModel) then
-		self.MaskModel:SetOwner(corpseEnt)
-		self.MaskModel:SetParent(corpseEnt)
+function ENT:OnCreateDeathCorpse(dmginfo, hitgroup, corpse)
+	local mask = self.MaskModel
+	if IsValid(mask) then
+		mask:SetOwner(corpse)
+		mask:SetParent(corpse)
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

@@ -19,33 +19,33 @@ ENT.Zombie_HazmatBroken = false
 function ENT:Zombie_CustomOnInitialize()
 	self:SetBodygroup(1, math.random(0, 5))
 	
-	self.MaskModel = ents.Create("prop_vj_animatable")
-	self.MaskModel:SetModel("models/cpthazama/l4d2/common/cim_faceplate.mdl")
-	self.MaskModel:SetLocalPos(self:GetPos())
-	self.MaskModel:SetOwner(self)
-	self.MaskModel:SetParent(self)
-	self.MaskModel:SetCollisionGroup(COLLISION_GROUP_IN_VEHICLE)
-	self.MaskModel:Spawn()
-	self.MaskModel:Activate()
-	self.MaskModel:SetSolid(SOLID_NONE)
-	self.MaskModel:AddEffects(EF_BONEMERGE)
+	local mask = ents.Create("prop_vj_animatable")
+	mask:SetModel("models/cpthazama/l4d2/common/cim_faceplate.mdl")
+	mask:SetLocalPos(self:GetPos())
+	mask:SetOwner(self)
+	mask:SetParent(self)
+	mask:SetCollisionGroup(COLLISION_GROUP_IN_VEHICLE)
+	mask:Spawn()
+	mask:Activate()
+	mask:SetSolid(SOLID_NONE)
+	mask:AddEffects(EF_BONEMERGE)
+	self.MaskModel = mask
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 local orgDmgFunc = ENT.OnDamaged
 --
 function ENT:OnDamaged(dmginfo, hitgroup, status)
-	if status == "PostDamage" && self.Zombie_HazmatBroken == false then
+	if status == "PostDamage" && !self.Zombie_HazmatBroken then
 		self.Zombie_HazmatBroken = true
 		VJ.EmitSound(self, sdDeflate, self.PainSoundLevel, math.random(90, 100))
 	end
 	orgDmgFunc(self, dmginfo, hitgroup, status)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:OnCreateDeathCorpse(dmginfo, hitgroup, corpseEnt)
-	self.MaskModel:SetOwner(corpseEnt)
-	self.MaskModel:SetParent(corpseEnt)
-end
----------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:CustomOnRemove()
-	//self.MaskModel:Remove()
+function ENT:OnCreateDeathCorpse(dmginfo, hitgroup, corpse)
+	local mask = self.MaskModel
+	if IsValid(mask) then
+		mask:SetOwner(corpse)
+		mask:SetParent(corpse)
+	end
 end

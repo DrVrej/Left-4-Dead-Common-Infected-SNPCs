@@ -11,4 +11,4 @@ ENT.StartHealth = 1000
 ENT.Immune_Fire = true
 ENT.CanGib = false
 
-ENT.Zombie_CanHearPipe = false -- Can it hear the pipe bombs?
+ENT.Zombie_CanHearPipe = false
