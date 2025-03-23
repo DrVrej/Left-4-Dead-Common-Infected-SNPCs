@@ -32,7 +32,7 @@ ENT.CanFlinch = true
 ENT.FlinchChance = 12
 ENT.AnimTbl_Flinch = "Shoved_Backward_01" // "vjges_flinch_01"
 ENT.FlinchHitGroupMap = {
-	{HitGroup = {HITGROUP_HEAD}, Animation = {"HeadshotFront"}},
+	{HitGroup = HITGROUP_HEAD, Animation = "HeadshotFront"},
 	//{HitGroup = {HITGROUP_CHEST, HITGROUP_STOMACH}, Animation = {"Shoved_Backward_01"}} -- Since there isn't any animation for legs or arms, just use this as general anim
 }
 
