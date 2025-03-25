@@ -40,7 +40,7 @@ function ENT:OnDamaged(dmginfo, hitgroup, status)
 			self.ZombieRiot_MaskHP = self.ZombieRiot_MaskHP - dmginfo:GetDamage()
 			if self.ZombieRiot_MaskHP <= 0 then -- Mask broke!
 				self.MaskModel:Remove()
-				VJ.EmitSound(self, "physics/glass/glass_impact_bullet"..math.random(1, 4)..".wav", 80)
+				VJ.EmitSound(self, "physics/glass/glass_impact_bullet" .. math.random(1, 4) .. ".wav", 80)
 			end
 		end
 		
