@@ -15,7 +15,7 @@ ENT.SoundTbl_FootStep = {"vj_l4d_com/footstep/riot/tile1.wav", "vj_l4d_com/foots
 -- Custom
 ENT.ZombieRiot_MaskHP = 80
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:Zombie_CustomOnInitialize()
+function ENT:Zombie_OnInit()
 	self:SetBodygroup(1, math.random(0, 3))
 	
 	local mask = ents.Create("prop_vj_animatable")

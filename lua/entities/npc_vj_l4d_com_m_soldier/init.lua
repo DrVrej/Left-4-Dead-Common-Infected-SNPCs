@@ -13,7 +13,7 @@ ENT.SoundTbl_FootStep = {"vj_l4d_com/footstep/concrete1.wav", "vj_l4d_com/footst
 
 ENT.FootstepSoundLevel = 80
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:Zombie_CustomOnInitialize()
+function ENT:Zombie_OnInit()
 	self:SetBodygroup(0, math.random(0, 3))
 	self:SetSkin(math.random(0, 15))
 end

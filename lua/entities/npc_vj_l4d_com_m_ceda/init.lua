@@ -16,7 +16,7 @@ local sdDeflate = {"vj_l4d_com/ceda/ceda_suit_deflate.wav", "vj_l4d_com/ceda/ced
 ENT.Zombie_CanPuke = false
 ENT.Zombie_HazmatBroken = false
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:Zombie_CustomOnInitialize()
+function ENT:Zombie_OnInit()
 	self:SetBodygroup(1, math.random(0, 5))
 	
 	local mask = ents.Create("prop_vj_animatable")

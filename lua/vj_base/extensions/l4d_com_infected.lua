@@ -42,11 +42,13 @@ ENT.SoundTbl_Idle = {"vj_l4d_com/idle/mumbling01.wav", "vj_l4d_com/idle/mumbling
 ENT.SoundTbl_CallForHelp = {"vj_l4d_com/alert/howl01.wav", "vj_l4d_com/alert/shout01.wav"}
 ENT.SoundTbl_MeleeAttackExtra = {"vj_l4d_com/attack_hit/hit_punch_01.wav", "vj_l4d_com/attack_hit/hit_punch_02.wav", "vj_l4d_com/attack_hit/hit_punch_03.wav", "vj_l4d_com/attack_hit/hit_punch_04.wav", "vj_l4d_com/attack_hit/hit_punch_05.wav", "vj_l4d_com/attack_hit/hit_punch_06.wav", "vj_l4d_com/attack_hit/hit_punch_07.wav", "vj_l4d_com/attack_hit/hit_punch_08.wav"}
 ENT.SoundTbl_MeleeAttackMiss = {"vj_l4d_com/attack_miss/claw_miss_1.wav", "vj_l4d_com/attack_miss/claw_miss_2.wav"}
+
+-- Gore sounds
 local sdGoreReg = {"vj_l4d_com/gore/melee/melee_arm_break_01.wav", "vj_l4d_com/gore/melee/melee_arm_break_02.wav"}
 local sdGoreHead = {"vj_l4d_com/gore/melee/melee_skull_break_01.wav", "vj_l4d_com/gore/melee/melee_skull_break_02.wav"}
 local sdGoreHeadDeath = {"vj_l4d_com/gore/headless/headless_1.wav", "vj_l4d_com/gore/headless/headless_2.wav", "vj_l4d_com/gore/headless/headless_3.wav", "vj_l4d_com/gore/headless/headless_4.wav"}
 
--- Male
+-- Male sounds
 local sdMale_CombatIdle = {"vj_l4d_com/idle_combat/alert24.wav", "vj_l4d_com/idle_combat/become_enraged01.wav", "vj_l4d_com/idle_combat/become_enraged02.wav", "vj_l4d_com/idle_combat/become_enraged03.wav", "vj_l4d_com/idle_combat/become_enraged06.wav", "vj_l4d_com/idle_combat/become_enraged07.wav", "vj_l4d_com/idle_combat/become_enraged09.wav", "vj_l4d_com/idle_combat/become_enraged10.wav", "vj_l4d_com/idle_combat/become_enraged11.wav", "vj_l4d_com/idle_combat/become_enraged30.wav", "vj_l4d_com/idle_combat/become_enraged50.wav", "vj_l4d_com/idle_combat/become_enraged51.wav", "vj_l4d_com/idle_combat/become_enraged52.wav", "vj_l4d_com/idle_combat/become_enraged53.wav", "vj_l4d_com/idle_combat/become_enraged54.wav", "vj_l4d_com/idle_combat/become_enraged55.wav", "vj_l4d_com/idle_combat/become_enraged56.wav", "vj_l4d_com/idle_combat/become_enraged57.wav", "vj_l4d_com/idle_combat/become_enraged58.wav", "vj_l4d_com/idle_combat/male/become_enraged40.wav", "vj_l4d_com/idle_combat/male/become_enraged41.wav", "vj_l4d_com/idle_combat/male/become_enraged42.wav", "vj_l4d_com/idle_combat/male/become_enraged43.wav"}
 local sdMale_Investigate = {"vj_l4d_com/investigate/become_alert01.wav", "vj_l4d_com/investigate/become_alert04.wav", "vj_l4d_com/investigate/become_alert09.wav", "vj_l4d_com/investigate/become_alert11.wav", "vj_l4d_com/investigate/become_alert12.wav", "vj_l4d_com/investigate/become_alert14.wav", "vj_l4d_com/investigate/become_alert17.wav", "vj_l4d_com/investigate/become_alert18.wav", "vj_l4d_com/investigate/become_alert21.wav", "vj_l4d_com/investigate/become_alert23.wav", "vj_l4d_com/investigate/become_alert25.wav", "vj_l4d_com/investigate/become_alert26.wav", "vj_l4d_com/investigate/become_alert29.wav", "vj_l4d_com/investigate/become_alert38.wav", "vj_l4d_com/investigate/become_alert41.wav", "vj_l4d_com/investigate/become_alert54.wav", "vj_l4d_com/investigate/become_alert55.wav", "vj_l4d_com/investigate/become_alert56.wav", "vj_l4d_com/investigate/become_alert57.wav", "vj_l4d_com/investigate/become_alert58.wav", "vj_l4d_com/investigate/become_alert59.wav", "vj_l4d_com/investigate/male/become_alert60.wav", "vj_l4d_com/investigate/male/become_alert61.wav", "vj_l4d_com/investigate/male/become_alert62.wav", "vj_l4d_com/investigate/male/become_alert63.wav"}
 local sdMale_Alert = {"vj_l4d_com/alert/shout02.wav", "vj_l4d_com/alert/shout03.wav", "vj_l4d_com/alert/shout04.wav", "vj_l4d_com/alert/shout06.wav", "vj_l4d_com/alert/shout07.wav", "vj_l4d_com/alert/shout08.wav", "vj_l4d_com/alert/shout09.wav", "vj_l4d_com/alert/recognize01.wav", "vj_l4d_com/alert/recognize02.wav", "vj_l4d_com/alert/recognize03.wav", "vj_l4d_com/alert/recognize04.wav", "vj_l4d_com/alert/recognize05.wav", "vj_l4d_com/alert/recognize06.wav", "vj_l4d_com/alert/recognize07.wav", "vj_l4d_com/alert/recognize08.wav", "vj_l4d_com/alert/alert13.wav", "vj_l4d_com/alert/alert22.wav", "vj_l4d_com/alert/alert23.wav", "vj_l4d_com/alert/alert25.wav", "vj_l4d_com/alert/alert27.wav", "vj_l4d_com/alert/alert36.wav", "vj_l4d_com/alert/alert43.wav", "vj_l4d_com/alert/alert44.wav", "vj_l4d_com/alert/hiss01.wav", "vj_l4d_com/alert/male/alert50.wav", "vj_l4d_com/alert/male/alert51.wav", "vj_l4d_com/alert/male/alert52.wav", "vj_l4d_com/alert/male/alert53.wav", "vj_l4d_com/alert/male/alert54.wav", "vj_l4d_com/alert/male/alert55.wav"}
@@ -54,7 +56,7 @@ local sdMale_BeforeMeleeAttack = {"vj_l4d_com/attack_b/male/rage_50.wav", "vj_l4
 local sdMale_Pain = {"vj_l4d_com/pain/been_shot_01.wav", "vj_l4d_com/pain/been_shot_04.wav", "vj_l4d_com/pain/been_shot_05.wav", "vj_l4d_com/pain/been_shot_06.wav", "vj_l4d_com/pain/been_shot_08.wav", "vj_l4d_com/pain/been_shot_09.wav", "vj_l4d_com/pain/been_shot_13.wav", "vj_l4d_com/pain/been_shot_14.wav", "vj_l4d_com/pain/been_shot_18.wav", "vj_l4d_com/pain/been_shot_22.wav", "vj_l4d_com/pain/been_shot_24.wav", "vj_l4d_com/pain/male/been_shot_30.wav", "vj_l4d_com/pain/male/been_shot_31.wav", "vj_l4d_com/pain/male/been_shot_32.wav", "vj_l4d_com/pain/male/been_shot_33.wav", "vj_l4d_com/pain/male/been_shot_34.wav", "vj_l4d_com/pain/male/been_shot_35.wav", "vj_l4d_com/pain/male/been_shot_36.wav", "vj_l4d_com/pain/male/been_shot_37.wav"}
 local sdMale_Death = {"vj_l4d_com/death/death_14.wav", "vj_l4d_com/death/death_17.wav", "vj_l4d_com/death/death_18.wav", "vj_l4d_com/death/death_19.wav", "vj_l4d_com/death/death_22.wav", "vj_l4d_com/death/death_23.wav", "vj_l4d_com/death/death_24.wav", "vj_l4d_com/death/death_25.wav", "vj_l4d_com/death/death_26.wav", "vj_l4d_com/death/death_27.wav", "vj_l4d_com/death/death_28.wav", "vj_l4d_com/death/death_29.wav", "vj_l4d_com/death/death_30.wav", "vj_l4d_com/death/death_32.wav", "vj_l4d_com/death/death_33.wav", "vj_l4d_com/death/death_34.wav", "vj_l4d_com/death/death_35.wav", "vj_l4d_com/death/death_36.wav", "vj_l4d_com/death/death_37.wav", "vj_l4d_com/death/death_38.wav", "vj_l4d_com/death/male/death_40.wav", "vj_l4d_com/death/male/death_41.wav", "vj_l4d_com/death/male/death_42.wav", "vj_l4d_com/death/male/death_43.wav", "vj_l4d_com/death/male/death_44.wav", "vj_l4d_com/death/male/death_45.wav", "vj_l4d_com/death/male/death_46.wav", "vj_l4d_com/death/male/death_47.wav", "vj_l4d_com/death/male/death_48.wav", "vj_l4d_com/death/male/death_49.wav"}
 
--- Female
+-- Female sounds
 local sdFemale_CombatIdle = {"vj_l4d_com/idle_combat/alert24.wav", "vj_l4d_com/idle_combat/become_enraged01.wav", "vj_l4d_com/idle_combat/become_enraged02.wav", "vj_l4d_com/idle_combat/become_enraged03.wav", "vj_l4d_com/idle_combat/become_enraged06.wav", "vj_l4d_com/idle_combat/become_enraged07.wav", "vj_l4d_com/idle_combat/become_enraged09.wav", "vj_l4d_com/idle_combat/become_enraged10.wav", "vj_l4d_com/idle_combat/become_enraged11.wav", "vj_l4d_com/idle_combat/become_enraged30.wav", "vj_l4d_com/idle_combat/become_enraged50.wav", "vj_l4d_com/idle_combat/become_enraged51.wav", "vj_l4d_com/idle_combat/become_enraged52.wav", "vj_l4d_com/idle_combat/become_enraged53.wav", "vj_l4d_com/idle_combat/become_enraged54.wav", "vj_l4d_com/idle_combat/become_enraged55.wav", "vj_l4d_com/idle_combat/become_enraged56.wav", "vj_l4d_com/idle_combat/become_enraged57.wav", "vj_l4d_com/idle_combat/become_enraged58.wav", "vj_l4d_com/idle_combat/female/become_enraged40.wav", "vj_l4d_com/idle_combat/female/become_enraged41.wav", "vj_l4d_com/idle_combat/female/become_enraged42.wav", "vj_l4d_com/idle_combat/female/become_enraged43.wav"}
 local sdFemale_Investigate = {"vj_l4d_com/investigate/become_alert01.wav", "vj_l4d_com/investigate/become_alert04.wav", "vj_l4d_com/investigate/become_alert09.wav", "vj_l4d_com/investigate/become_alert11.wav", "vj_l4d_com/investigate/become_alert12.wav", "vj_l4d_com/investigate/become_alert14.wav", "vj_l4d_com/investigate/become_alert17.wav", "vj_l4d_com/investigate/become_alert18.wav", "vj_l4d_com/investigate/become_alert21.wav", "vj_l4d_com/investigate/become_alert23.wav", "vj_l4d_com/investigate/become_alert25.wav", "vj_l4d_com/investigate/become_alert26.wav", "vj_l4d_com/investigate/become_alert29.wav", "vj_l4d_com/investigate/become_alert38.wav", "vj_l4d_com/investigate/become_alert41.wav", "vj_l4d_com/investigate/become_alert54.wav", "vj_l4d_com/investigate/become_alert55.wav", "vj_l4d_com/investigate/become_alert56.wav", "vj_l4d_com/investigate/become_alert57.wav", "vj_l4d_com/investigate/become_alert58.wav", "vj_l4d_com/investigate/become_alert59.wav", "vj_l4d_com/investigate/female/become_alert60.wav", "vj_l4d_com/investigate/female/become_alert61.wav", "vj_l4d_com/investigate/female/become_alert62.wav", "vj_l4d_com/investigate/female/become_alert63.wav"}
 local sdFemale_Alert = {"vj_l4d_com/alert/shout02.wav", "vj_l4d_com/alert/shout03.wav", "vj_l4d_com/alert/shout04.wav", "vj_l4d_com/alert/shout06.wav", "vj_l4d_com/alert/shout07.wav", "vj_l4d_com/alert/shout08.wav", "vj_l4d_com/alert/shout09.wav", "vj_l4d_com/alert/recognize01.wav", "vj_l4d_com/alert/recognize02.wav", "vj_l4d_com/alert/recognize03.wav", "vj_l4d_com/alert/recognize04.wav", "vj_l4d_com/alert/recognize05.wav", "vj_l4d_com/alert/recognize06.wav", "vj_l4d_com/alert/recognize07.wav", "vj_l4d_com/alert/recognize08.wav", "vj_l4d_com/alert/alert16.wav", "vj_l4d_com/alert/alert26.wav", "vj_l4d_com/alert/alert37.wav", "vj_l4d_com/alert/alert38.wav", "vj_l4d_com/alert/alert39.wav", "vj_l4d_com/alert/alert40.wav", "vj_l4d_com/alert/alert41.wav", "vj_l4d_com/alert/alert42.wav", "vj_l4d_com/alert/hiss01.wav", "vj_l4d_com/alert/female/alert50.wav", "vj_l4d_com/alert/female/alert51.wav", "vj_l4d_com/alert/female/alert52.wav", "vj_l4d_com/alert/female/alert53.wav", "vj_l4d_com/alert/female/alert54.wav", "vj_l4d_com/alert/female/alert55.wav"}
@@ -69,7 +71,7 @@ ENT.Zombie_CanPuke = true -- Can this zombie puke? (Particle)
 ENT.Zombie_CanHearPipe = true -- Can it hear the pipe bombs?
 ENT.Zombie_NextPipBombT = 0
 ENT.Zombie_NextStumbleT = 0
-ENT.Zombie_NoAlertAnimation = false
+ENT.Zombie_SkipAlertAnim = false
 
 -- Idle Stance System
 local IDLE_STATE_NORMAL = 0
@@ -120,7 +122,7 @@ function ENT:Init()
 		self.SoundTbl_Death = sdMale_Death
 	end
 	
-	local initFunc = self.Zombie_CustomOnInitialize
+	local initFunc = self.Zombie_OnInit
 	if initFunc then
 		initFunc(self)
 	end
@@ -167,7 +169,7 @@ function ENT:OnInput(key, activator, caller, data)
 		self:PlayFootstepSound()
 	elseif key == "event_mattack" then
 		self:ExecuteMeleeAttack()
-	elseif key == "event_vomit" && self.Zombie_CanPuke == true then
+	elseif key == "event_vomit" && self.Zombie_CanPuke then
 		ParticleEffectAttach("vj_l4d_vomit", PATTACH_POINT_FOLLOW, self, 9)
 	end
 end
@@ -190,12 +192,11 @@ function ENT:OnInvestigate(ent)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnAlert(ent)
-	if self.Zombie_NoAlertAnimation == false && self.Zombie_IdleState == IDLE_STATE_NORMAL && !self:IsMoving() && math.random (1, 3) == 1 then
+	if !self.Zombie_SkipAlertAnim && self.Zombie_IdleState == IDLE_STATE_NORMAL && !self:IsMoving() && math.random (1, 3) == 1 then
 		self:PlayAnim("idle_alert_straight_05", true, math.Rand(1.5, 3), true) -- "idle_alert_straight_05", "idle_alert_straight_08"
 	end
-	self.Zombie_NoAlertAnimation = false
+	self.Zombie_SkipAlertAnim = false
 end
-
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Allies_CallHelp(dist)
 	-- Don't call for help if the enemy is a pipe bomb, this prevents infected with "Zombie_CanHearPipe" disabled from attacking the pipe bomb
@@ -214,7 +215,7 @@ end
 function ENT:OnSetEnemyFromDamage(dmginfo, hitgroup)
 	if self.Zombie_IdleState == IDLE_STATE_NORMAL && math.random(1, 2) == 1 then
 		self:PlayAnim(animDmgSetEnemy, true, math.Rand(1.5, 3), true)
-		self.Zombie_NoAlertAnimation = true
+		self.Zombie_SkipAlertAnim = true
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
@@ -225,11 +226,12 @@ end
 function ENT:OnThinkActive()
 	self:SetPoseParameter("move_x", 1) -- Kalelou hamar
 	
+	local curTime = CurTime()
 	local eneValid = IsValid(self:GetEnemy())
 	
 	-- Behavior: Sit / Sleep
 	if self.Zombie_IdleState == IDLE_STATE_NORMAL then
-		if !eneValid && !self:IsMoving() && CurTime() > self.Zombie_IdleStateChangeT then
+		if !eneValid && !self:IsMoving() && curTime > self.Zombie_IdleStateChangeT then
 			local sitTime = math.Rand(10, 30)
 			if math.random(1, 3) == 1 then
 				if math.random(1, 2) == 1 then
@@ -243,9 +245,9 @@ function ENT:OnThinkActive()
 				self:SetState(VJ_STATE_ONLY_ANIMATION, sitTime)
 				self.Zombie_IdleQuickStand = false
 			end
-			self.Zombie_IdleStandT = CurTime() + sitTime
+			self.Zombie_IdleStandT = curTime + sitTime
 		end
-	elseif eneValid or self:IsMoving() or CurTime() > self.Zombie_IdleStandT then
+	elseif eneValid or self:IsMoving() or curTime > self.Zombie_IdleStandT then
 		self:SetState()
 		local curSeq = self:GetSequenceName(self:GetSequence())
 		local quick = self.Zombie_IdleQuickStand or eneValid
@@ -260,13 +262,13 @@ function ENT:OnThinkActive()
 		end
 		self.Zombie_IdleState = IDLE_STATE_NORMAL
 		self.Zombie_IdleQuickStand = false
-		self.Zombie_IdleStateChangeT = CurTime() + math.Rand(10, 80)
+		self.Zombie_IdleStateChangeT = curTime + math.Rand(10, 80)
 	end
 	
 	-- Experimental Climbing System (Very old!)
 	//print(self:GetBlockingEntity())
 	// IsValid(self:GetBlockingEntity()) && !self:GetBlockingEntity():IsNPC() && !self:GetBlockingEntity():IsPlayer()
-	if self.Zombie_CanClimb && !self.Dead && !self.Zombie_IsClimbing && CurTime() > self.Zombie_NextClimbT then
+	if self.Zombie_CanClimb && !self.Dead && !self.Zombie_IsClimbing && curTime > self.Zombie_NextClimbT then
 		//print("-------------------------------------------------------------------------------------")
 		local anim = false
 		local finalpos = self:GetPos()
@@ -318,24 +320,26 @@ function ENT:OnThinkActive()
 					end
 				end)
 			end
-			self.Zombie_NextClimbT = CurTime() + 0.1 //5
+			self.Zombie_NextClimbT = curTime + 2
 		end
 	end
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnDamaged(dmginfo, hitgroup, status)
 	if status == "PostDamage" then
+		local curTime = CurTime()
+		
 		self.Zombie_IdleStandT = 0
 		self.Zombie_IdleQuickStand = true
-		self.Zombie_IdleStateChangeT = CurTime() + math.Rand(5, 10)
+		self.Zombie_IdleStateChangeT = curTime + math.Rand(5, 10)
 		
 		-- Randomly stumble when damaged while running
-		if !self.Flinching && !self:IsOnFire() && self:IsMoving() && self:GetActivity() == ACT_RUN && self.Zombie_NextStumbleT < CurTime() && math.random(1, 16) == 1 then
+		if !self.Flinching && !self:IsOnFire() && self:IsMoving() && self:GetActivity() == ACT_RUN && self.Zombie_NextStumbleT < curTime && math.random(1, 16) == 1 then
 			if self:IsPlayingGesture(self.AttackAnim) then -- Stop the attack gesture!
 				self:RemoveGesture(self.AttackAnim)
 			end
 			self:PlayAnim("run_stumble_01", true, 2.4)
-			self.Zombie_NextStumbleT = CurTime() + math.Rand(8, 14)
+			self.Zombie_NextStumbleT = curTime + math.Rand(8, 14)
 		end
 	end
 end

@@ -12,6 +12,6 @@ ENT.Zombie_IsMudMen = true
 
 ENT.SoundTbl_FootStep = {"vj_l4d_com/footstep/mud/concrete1.wav", "vj_l4d_com/footstep/mud/concrete2.wav", "vj_l4d_com/footstep/mud/concrete3.wav", "vj_l4d_com/footstep/mud/concrete4.wav"}
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:Zombie_CustomOnInitialize()
+function ENT:Zombie_OnInit()
 	self:SetBodygroup(1, 5)
 end

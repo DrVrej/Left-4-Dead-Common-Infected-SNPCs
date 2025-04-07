@@ -9,7 +9,7 @@ include("shared.lua")
 ENT.Model = "models/cpthazama/l4d1/common/common_female01.mdl"
 ENT.Zombie_Gender = 1
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:Zombie_CustomOnInitialize()
+function ENT:Zombie_OnInit()
 	self:SetBodygroup(0, math.random(0, 2))
 	self:SetBodygroup(1, math.random(0, 1))
 	self:SetBodygroup(2, math.random(0, 1))

@@ -8,7 +8,7 @@ include("shared.lua")
 -----------------------------------------------*/
 ENT.Model = {"models/cpthazama/l4d1/common/common_male_baggagehandler_01.mdl", "models/cpthazama/l4d1/common/common_male_pilot.mdl", "models/cpthazama/l4d1/common/common_tsaagent_male01.mdl"}
 ---------------------------------------------------------------------------------------------------------------------------------------------
-function ENT:Zombie_CustomOnInitialize()
+function ENT:Zombie_OnInit()
 	if self:GetModel() == "models/cpthazama/l4d1/common/common_tsaagent_male01.mdl" then
 		self:SetBodygroup(0, math.random(0, 4))
 	else
