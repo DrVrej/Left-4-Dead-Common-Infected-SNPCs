@@ -4,3 +4,6 @@ ENT.PrintName 		= "Mud Man Infected"
 ENT.Author 			= "DrVrej"
 ENT.Contact 		= "http://steamcommunity.com/groups/vrejgaming"
 ENT.Category		= "Left 4 Dead"
+
+ENT.IsVJL4DCommonInfected = true
+ENT.VJ_ID_Undead = true
