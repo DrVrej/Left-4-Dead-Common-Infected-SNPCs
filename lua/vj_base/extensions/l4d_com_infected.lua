@@ -64,7 +64,6 @@ local sdFemale_Death = {"vj_l4d_com/death/death_14.wav", "vj_l4d_com/death/death
 
 -- Custom
 ENT.Zombie_Gender = 0 -- 0 = Male | 1 = Female
-ENT.Zombie_IsMudMen = false -- Is this a mud man zombie?
 ENT.Zombie_CanPuke = true -- Can this zombie puke? (Particle)
 ENT.Zombie_CanHearPipe = true -- Can it hear the pipe bombs?
 ENT.Zombie_NextPipBombT = 0
@@ -154,7 +153,7 @@ function ENT:TranslateActivity(act)
 	elseif act == ACT_WALK or act == ACT_RUN then
 		if self:IsOnFire() && !self.Immune_Fire then -- On fire movement
 			return ACT_RUN_ON_FIRE -- "run_onfire", "run_onfire_01"
-		elseif self.Zombie_IsMudMen then -- Mud man unique movement
+		elseif self.VJ_L4D_IsMudMen then -- Mud man unique movement
 			return ACT_RUN_STEALTH
 		end
 	end

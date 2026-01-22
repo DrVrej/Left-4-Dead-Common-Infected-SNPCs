@@ -6,4 +6,5 @@ ENT.Contact 		= "http://steamcommunity.com/groups/vrejgaming"
 ENT.Category		= "Left 4 Dead"
 
 ENT.IsVJL4DCommonInfected = true
+ENT.VJ_L4D_IsCEDA = true
 ENT.VJ_ID_Undead = true
