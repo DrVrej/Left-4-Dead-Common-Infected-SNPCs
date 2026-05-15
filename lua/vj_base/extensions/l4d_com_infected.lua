@@ -1,5 +1,5 @@
 /*-----------------------------------------------
-	*** Copyright (c) 2012-2025 by DrVrej, All rights reserved. ***
+	*** Copyright (c) 2012-2026 by DrVrej, All rights reserved. ***
 	No parts of this code or any of its contents may be reproduced, copied, modified or adapted,
 	without the prior written consent of the author, unless otherwise indicated for stand-alone materials.
 -----------------------------------------------*/
@@ -10,6 +10,7 @@ ENT.BloodDecal = {"VJ_L4D_Blood"}
 ENT.PoseParameterLooking_Names = {pitch = {"body_pitch"}, yaw = {"body_yaw"}, roll = {}}
 ENT.HasBloodPool = false
 
+-- Melee attack
 ENT.HasMeleeAttack = true
 ENT.MeleeAttackDamage = 10
 ENT.AnimTbl_MeleeAttack = "vjges_" .. ACT_MELEE_ATTACK2
@@ -17,22 +18,24 @@ ENT.TimeUntilMeleeAttackDamage = false
 ENT.MeleeAttackPlayerSpeed = true
 ENT.MeleeAttackPlayerSpeedTime = 0.5
 
+-- Death / Gibs
 ENT.GibOnDeathFilter = false
 ENT.HasDeathAnimation = true
 ENT.AnimTbl_Death = {"death_01", "death_02a", "death_02c", "death_03", "death_05", "death_06", "death_07", "death_08", "death_08b", "death_09", "death_10ab", "death_10b", "death_10c", "death_11_01a", "death_11_01b", "death_11_02a", "death_11_02b", "death_11_02c", "death_11_02d", "death_11_03a", "death_11_03b", "death_11_03c"}
 ENT.DeathAnimationChance = 2
 
-ENT.DisableFootStepSoundTimer = true
-ENT.HasExtraMeleeAttackSounds = true
-ENT.HasMeleeAttackPlayerSpeedSounds = false
-
+-- Flinching
 ENT.CanFlinch = true
 ENT.FlinchChance = 12
 ENT.AnimTbl_Flinch = "Shoved_Backward_01" // "vjges_flinch_01"
 ENT.FlinchHitGroupMap = {
 	{HitGroup = HITGROUP_HEAD, Animation = "HeadshotFront"},
-	//{HitGroup = {HITGROUP_CHEST, HITGROUP_STOMACH}, Animation = {"Shoved_Backward_01"}} -- Since there isn't any animation for legs or arms, just use this as general anim
+	//{HitGroup = {HITGROUP_CHEST, HITGROUP_STOMACH}, Animation = "Shoved_Backward_01"} -- Since there isn't any animation for legs or arms, just use this as general anim
 }
+
+ENT.DisableFootStepSoundTimer = true
+ENT.HasExtraMeleeAttackSounds = true
+ENT.HasMeleeAttackPlayerSpeedSounds = false
 
 ENT.SoundTbl_FootStep = {"vj_l4d_com/footstep/dirt1.wav", "vj_l4d_com/footstep/dirt2.wav", "vj_l4d_com/footstep/dirt3.wav", "vj_l4d_com/footstep/dirt4.wav"}
 ENT.SoundTbl_Breath = {"vj_l4d_com/idle_breath/breathing01.wav", "vj_l4d_com/idle_breath/breathing08.wav", "vj_l4d_com/idle_breath/breathing09.wav", "vj_l4d_com/idle_breath/breathing10.wav", "vj_l4d_com/idle_breath/breathing13.wav", "vj_l4d_com/idle_breath/breathing16.wav", "vj_l4d_com/idle_breath/breathing18.wav", "vj_l4d_com/idle_breath/breathing25.wav", "vj_l4d_com/idle_breath/breathing26.wav", "vj_l4d_com/idle_breath/idle_breath_01.wav", "vj_l4d_com/idle_breath/idle_breath_02.wav", "vj_l4d_com/idle_breath/idle_breath_03.wav", "vj_l4d_com/idle_breath/idle_breath_04.wav", "vj_l4d_com/idle_breath/idle_breath_06.wav"}
@@ -100,6 +103,10 @@ ENT.Zombie_NextClimbT = 0
 
 /* TODO:
 	- System to support shoving animations
+	- Requires model updates:
+		- Add "eyes" attachment to all models
+		- Rename some activities to use defined activities
+		- Simplify event names
 */
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Init()
@@ -224,48 +231,50 @@ function ENT:OnThinkActive()
 	self:SetPoseParameter("move_x", 1) -- Kalelou hamar
 	
 	local curTime = CurTime()
-	local eneValid = IsValid(self:GetEnemy())
+	local selfData = self:GetTable()
+	local eneValid = IsValid(selfData.EnemyData.Target)
 	
 	-- Behavior: Sit / Sleep
-	if self.Zombie_IdleState == IDLE_STATE_NORMAL then
-		if !eneValid && !self:IsMoving() && curTime > self.Zombie_IdleStateChangeT then
+	if selfData.Zombie_IdleState == IDLE_STATE_NORMAL then
+		if !eneValid && !self:IsMoving() && curTime > selfData.Zombie_IdleStateChangeT then
 			local sitTime = math.Rand(10, 30)
 			if math.random(1, 3) == 1 then
 				if math.random(1, 2) == 1 then
-					self.Zombie_IdleState = IDLE_STATE_SITTING
+					selfData.Zombie_IdleState = IDLE_STATE_SITTING
 					self:PlayAnim("standing_to_sitting03", true, false)
 				else
 					sitTime = math.Rand(30, 60)
-					self.Zombie_IdleState = IDLE_STATE_LYING
+					selfData.Zombie_IdleState = IDLE_STATE_LYING
 					self:PlayAnim("standing_to_lying03", true, false)
 				end
 				self:SetState(VJ_STATE_ONLY_ANIMATION, sitTime)
-				self.Zombie_IdleQuickStand = false
+				selfData.Zombie_IdleQuickStand = false
 			end
-			self.Zombie_IdleStandT = curTime + sitTime
+			selfData.Zombie_IdleStandT = curTime + sitTime
 		end
-	elseif eneValid or self:IsMoving() or curTime > self.Zombie_IdleStandT then
+	elseif eneValid or self:IsMoving() or curTime > selfData.Zombie_IdleStandT then
 		self:SetState()
 		local curSeq = self:GetSequenceName(self:GetSequence())
-		local quick = self.Zombie_IdleQuickStand or eneValid
+		local quick = selfData.Zombie_IdleQuickStand or eneValid
 		if curSeq == "Standing_to_Sitting03" or curSeq == "Standing_to_Lying03" then -- Do NOT play standing up anim if we were still transitioning to sitting / lying
 			self:StopCurrentSchedule()
 		else
-			if self.Zombie_IdleState == IDLE_STATE_SITTING then
+			if selfData.Zombie_IdleState == IDLE_STATE_SITTING then
 				self:PlayAnim(quick and "sitting_to_standing_alert" or "sitting03_to_standing", true, false)
-			elseif self.Zombie_IdleState == IDLE_STATE_LYING then
+			elseif selfData.Zombie_IdleState == IDLE_STATE_LYING then
 				self:PlayAnim(quick and "lying_to_standing_alert" or "lying03_to_standing", true, false)
 			end
 		end
-		self.Zombie_IdleState = IDLE_STATE_NORMAL
-		self.Zombie_IdleQuickStand = false
-		self.Zombie_IdleStateChangeT = curTime + math.Rand(10, 80)
+		selfData.Zombie_IdleState = IDLE_STATE_NORMAL
+		selfData.Zombie_IdleQuickStand = false
+		selfData.Zombie_IdleStateChangeT = curTime + math.Rand(10, 80)
 	end
 	
-	-- Experimental Climbing System (Very old!)
+	-- Experimental Climbing System
+	-- NOTE: This is VERY old and unoptimized, recommended not to use but it's here if you want to play around with it
 	//print(self:GetBlockingEntity())
 	// IsValid(self:GetBlockingEntity()) && !self:GetBlockingEntity():IsNPC() && !self:GetBlockingEntity():IsPlayer()
-	if self.Zombie_CanClimb && !self.Dead && !self.Zombie_IsClimbing && curTime > self.Zombie_NextClimbT then
+	if selfData.Zombie_CanClimb && !selfData.Dead && !selfData.Zombie_IsClimbing && curTime > selfData.Zombie_NextClimbT then
 		//print("-------------------------------------------------------------------------------------")
 		local anim = false
 		local finalpos = self:GetPos()
@@ -303,7 +312,7 @@ function ENT:OnThinkActive()
 			if anim != false then
 				//print(anim)
 				self:SetGroundEntity(NULL)
-				self.Zombie_IsClimbing = true
+				selfData.Zombie_IsClimbing = true
 				timer.Simple(0.4, function()
 					if IsValid(self) then
 						self:SetPos(finalpos)
@@ -317,7 +326,7 @@ function ENT:OnThinkActive()
 					end
 				end)
 			end
-			self.Zombie_NextClimbT = curTime + 2
+			selfData.Zombie_NextClimbT = curTime + 2
 		end
 	end
 end
@@ -354,7 +363,7 @@ function ENT:HandleGibOnDeath(dmginfo, hitgroup)
 	local playDeathAnim = true
 	if hitgroup == HITGROUP_HEAD then
 		local attachHead = self:GetAttachment(self:LookupAttachment("severed_head"))
-		self:CreateGibEntity("prop_ragdoll", "models/cpthazama/l4d1/gibs/limb_male_head01.mdl", {Pos=attachHead.Pos, Ang=self:GetAngles(), Vel="UseDamageForce"}, function(gib)
+		self:CreateGibEntity("prop_ragdoll", "models/cpthazama/l4d1/gibs/limb_male_head01.mdl", {Pos = attachHead.Pos, Ang = self:GetAngles(), Vel = "UseDamageForce"}, function(gib)
 			//self.HasDeathSounds = false
 			self.SoundTbl_Death = sdGoreHeadDeath
 			self:RemoveAllDecals()
@@ -373,21 +382,21 @@ function ENT:HandleGibOnDeath(dmginfo, hitgroup)
 			end
 		end)
 	elseif hitgroup == HITGROUP_LEFTARM then
-		self:CreateGibEntity("prop_ragdoll", "models/cpthazama/l4d1/gibs/limb_male_larm01.mdl", {Pos=self:GetAttachment(self:LookupAttachment("severed_larm")).Pos - self:GetRight()*-5, Ang=self:GetAngles(), Vel="UseDamageForce"}, function(gib)
+		self:CreateGibEntity("prop_ragdoll", "models/cpthazama/l4d1/gibs/limb_male_larm01.mdl", {Pos = self:GetAttachment(self:LookupAttachment("severed_larm")).Pos - self:GetRight() * -5, Ang = self:GetAngles(), Vel = "UseDamageForce"}, function(gib)
 			self:Zombie_Gibs("la")
 		end)
 	elseif hitgroup == HITGROUP_RIGHTARM then
-		self:CreateGibEntity("prop_ragdoll", "models/cpthazama/l4d1/gibs/limb_male_rarm01.mdl", {Pos=self:GetAttachment(self:LookupAttachment("severed_rarm")).Pos - self:GetRight()*-5, Ang=self:GetAngles(), Vel="UseDamageForce"}, function(gib)
+		self:CreateGibEntity("prop_ragdoll", "models/cpthazama/l4d1/gibs/limb_male_rarm01.mdl", {Pos = self:GetAttachment(self:LookupAttachment("severed_rarm")).Pos - self:GetRight() * -5, Ang = self:GetAngles(), Vel = "UseDamageForce"}, function(gib)
 			self:Zombie_Gibs("ra")
 		end)
 	elseif hitgroup == HITGROUP_LEFTLEG then
 		playDeathAnim = false
-		self:CreateGibEntity("prop_ragdoll", "models/cpthazama/l4d1/gibs/limb_male_lleg01.mdl", {Pos=self:GetAttachment(self:LookupAttachment("lfoot")).Pos - self:GetRight()*-5, Ang=self:GetAngles(), Vel="UseDamageForce"}, function(gib)
+		self:CreateGibEntity("prop_ragdoll", "models/cpthazama/l4d1/gibs/limb_male_lleg01.mdl", {Pos = self:GetAttachment(self:LookupAttachment("lfoot")).Pos - self:GetRight() * -5, Ang = self:GetAngles(), Vel = "UseDamageForce"}, function(gib)
 			self:Zombie_Gibs("ll")
 		end)
 	elseif hitgroup == HITGROUP_RIGHTLEG then
 		playDeathAnim = false
-		self:CreateGibEntity("prop_ragdoll", "models/cpthazama/l4d1/gibs/limb_male_rleg01.mdl", {Pos=self:GetAttachment(self:LookupAttachment("rfoot")).Pos - self:GetRight()*5, Ang=self:GetAngles(), Vel="UseDamageForce"}, function(gib)
+		self:CreateGibEntity("prop_ragdoll", "models/cpthazama/l4d1/gibs/limb_male_rleg01.mdl", {Pos = self:GetAttachment(self:LookupAttachment("rfoot")).Pos - self:GetRight() * 5, Ang = self:GetAngles(), Vel = "UseDamageForce"}, function(gib)
 			self:Zombie_Gibs("rl")
 		end)
 	else
