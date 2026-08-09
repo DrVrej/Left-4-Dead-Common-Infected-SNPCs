@@ -10,10 +10,12 @@ SWEP.AdminOnly = true
 
 SWEP.ViewModel = "models/cpthazama/l4d1/weapons/v_pipebomb.mdl"
 SWEP.WorldModel = "models/cpthazama/l4d1/weapons/pipebomb.mdl"
+SWEP.WorldModelOffsetParams = {
+	Enabled = true,
+	Pos = Vector(3, -1.5, -2),
+	Ang = Angle(0, 0, -180)
+}
 SWEP.HoldType = "grenade"
-SWEP.WorldModel_UseCustomPosition = true
-SWEP.WorldModel_CustomPositionAngle = Vector(0, 0, 180)
-SWEP.WorldModel_CustomPositionOrigin = Vector(-1.5, 3, 2)
 SWEP.ViewModelFOV = 90
 SWEP.Slot = 4
 SWEP.SlotPos = 4

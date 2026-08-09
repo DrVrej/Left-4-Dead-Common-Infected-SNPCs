@@ -95,7 +95,7 @@ function ENT:Initialize()
 	self:SetCollisionGroup(COLLISION_GROUP_NONE)
 	self:SetMoveType(MOVETYPE_NONE)
 	self:SetSolid(SOLID_NONE)
-	self:SetPos(Vector(0, 0, 0))
+	self:SetPos(Vector())
 	self:SetNoDraw(true)
 	self:DrawShadow(false)
 	

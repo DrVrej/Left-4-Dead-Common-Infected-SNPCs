@@ -31,7 +31,7 @@ local entsList = {
 	"npc_vj_l4d_com_m_jimmy:150"
 }
 ENT.EntitiesToSpawn = {
-	{SpawnPosition = Vector(0, 0, 0), Entities = entsList},
+	{SpawnPosition = Vector(), Entities = entsList},
 	{SpawnPosition = Vector(50, 50, 0), Entities = entsList},
 	{SpawnPosition = Vector(50, -50, 0), Entities = entsList},
 	{SpawnPosition = Vector(-50, 50, 0), Entities = entsList},
