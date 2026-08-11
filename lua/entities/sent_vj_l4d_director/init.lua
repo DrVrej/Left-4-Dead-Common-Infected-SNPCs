@@ -60,7 +60,7 @@ end
 
 function ENT:Initialize()
 	local i = 0
-	for k, v in ipairs(ents.GetAll()) do
+	for _, v in ipairs(ents.GetAll()) do
 		if v:GetClass() == "sent_vj_l4d_director" then
 			i = i + 1
 			if i > 1 then PrintMessage(HUD_PRINTTALK, "Only one A.I. Director can be present in the map.") self.SkipOnRemove = true self:Remove() return end
@@ -148,7 +148,7 @@ function ENT:CheckVisibility(pos,ent,mdl)
 end
 
 function ENT:FindCenterNavPoint(ent)
-	for _,v in RandomPairs(self.navAreas) do
+	for _, v in RandomPairs(self.navAreas) do
 		local testPos = v:GetCenter()
 		local dist = testPos:Distance(ent:GetPos())
 		if dist <= self.CI_SpawnDistance && dist >= self.CI_SpawnDistanceClose && !self:CheckVisibility(testPos,ent) then
@@ -159,7 +159,7 @@ function ENT:FindCenterNavPoint(ent)
 end
 
 function ENT:FindHiddenNavPoint(ent)
-	for _,v in RandomPairs(self.navAreas) do
+	for _, v in RandomPairs(self.navAreas) do
 		local hidingSpots = v:GetHidingSpots()
 		if !hidingSpots then continue end
 		if #hidingSpots <= 0 then continue end
@@ -173,7 +173,7 @@ function ENT:FindHiddenNavPoint(ent)
 end
 
 function ENT:FindRandomNavPoint(ent)
-	for _,v in RandomPairs(self.navAreas) do
+	for _, v in RandomPairs(self.navAreas) do
 		local testPos = v:GetRandomPoint()
 		local dist = testPos:Distance(ent:GetPos())
 		if dist <= self.CI_SpawnDistance && dist >= self.CI_SpawnDistanceClose && !self:CheckVisibility(testPos,ent) then
@@ -183,10 +183,10 @@ function ENT:FindRandomNavPoint(ent)
 	return false
 end
 
-function ENT:GetClosestNavPosition(ent,getHidden)
+function ENT:GetClosestNavPosition(ent, getHidden)
 	local pos = false
 	local closestDist = 999999999
-	for i,v in pairs(self.navAreas) do
+	for _, v in pairs(self.navAreas) do
 		local hidingSpots = getHidden && v:GetHidingSpots() or true
 		if !hidingSpots then continue end
 		if istable(hidingSpots) && #hidingSpots <= 0 then continue end
@@ -273,7 +273,7 @@ end
 function ENT:GetClosestSurvivor(pos)
 	local ent = NULL
 	local closestDist = 999999999
-	for _,v in pairs(self:FindSurvivors()) do
+	for _, v in pairs(self:FindSurvivors()) do
 		local dist = v:GetPos():Distance(pos)
 		if dist < closestDist then
 			closestDist = dist
@@ -283,11 +283,11 @@ function ENT:GetClosestSurvivor(pos)
 	return ent
 end
 
-function ENT:CheckSurvivorDistance(ent,remove)
-	local remove = remove or true
+function ENT:CheckSurvivorDistance(ent, remove)
+	remove = remove or true
 	local closestDist = 999999999
 	local visible = false
-	for _,v in pairs(self:FindSurvivors()) do
+	for _, v in pairs(self:FindSurvivors()) do
 		local dist = v:GetPos():Distance(ent:GetPos())
 		if dist < closestDist then
 			closestDist = dist
@@ -341,7 +341,7 @@ function ENT:Think()
 							v:SetGhost(true)
 						end
 					else
-						table_remove(self.tbl_SpawnedSpecialInfected,i)
+						table_remove(self.tbl_SpawnedSpecialInfected, i)
 					end
 				end
 			end
@@ -352,7 +352,7 @@ function ENT:Think()
 							self:CheckSurvivorDistance(v)
 						end
 					else
-						table_remove(self.tbl_SpawnedBossSpecialInfected,i)
+						table_remove(self.tbl_SpawnedBossSpecialInfected, i)
 					end
 				end
 			end
@@ -362,7 +362,7 @@ function ENT:Think()
 		-- Manages Music
 		local enemyTblCount = #self.tbl_NPCsWithEnemies
 		if enemyTblCount > 0 then
-			if enemyTblCount > self.CI_MaxInfected *0.5 then
+			if enemyTblCount > self.CI_MaxInfected * 0.5 then
 				self:DoMusic(false)
 			else
 				if self.DidStartMusic && CurTime() > self.NextMusicSwitchT then
@@ -411,8 +411,8 @@ function ENT:Think()
 	end
 end
 
-function ENT:PlaySong(ply,snd,stop)
-	local snd = snd or ""
+function ENT:PlaySong(ply, snd, stop)
+	snd = snd or ""
 	if stop == 2 then
 		net.Start("vj_l4d_directormusic_simple")
 			net.WriteEntity(ply)
@@ -446,14 +446,14 @@ function ENT:DoMusic(stop)
 		else
 			self.DidStartMusic = false
 			self.NextMusicSwitchT = CurTime() +1
-			self:PlaySong(v,nil,true)
+			self:PlaySong(v, nil, true)
 		end
 	end
 end
 
 function ENT:GetSpecialCount(class)
 	local count = 0
-	for _,v in pairs(self.tbl_SpawnedSpecialInfected) do
+	for _, v in pairs(self.tbl_SpawnedSpecialInfected) do
 		if IsValid(v) && v:GetClass() == class then
 			count = count +1
 		end
@@ -464,9 +464,9 @@ end
 function ENT:PickInfected(tbl)
 	local useMax = tbl == self.SpecialInfected
 	local ent = false
-	for _,v in RandomPairs(tbl) do
+	for _, v in RandomPairs(tbl) do
 		if !useMax then
-			if math.random(1,v.chance) == 1 then
+			if math.random(1, v.chance) == 1 then
 				ent = v.class
 				break
 			end
@@ -480,90 +480,80 @@ function ENT:PickInfected(tbl)
 	return ent
 end
 
-function ENT:SpawnInfected(ent,pos,isMob)
+function ENT:SpawnInfected(ent, pos, isMob)
 	if ent == false then return end
 	if pos == nil or pos == false then return end
 	if #self.tbl_SpawnedNPCs >= self.CI_MaxInfected then return end
 	local infected = ents.Create(ent)
 	infected:SetPos(pos)
-	infected:SetAngles(Angle(0,math.random(0,360),0))
+	infected:SetAngles(Angle(0, math.random(0, 360), 0))
 	infected:Spawn()
-	table_insert(self.tbl_SpawnedNPCs,infected)
+	table_insert(self.tbl_SpawnedNPCs, infected)
 	if isMob then
 		infected.SightAngle = 360
 		infected.EnemyXRayDetection = true
 		infected:DrawShadow(false)
-		timer.Simple(0,function()
-			if IsValid(infected) then
-				infected:DrawShadow(false)
-			end
-		end)
+		timer.Simple(0, function() if IsValid(infected) then infected:DrawShadow(false) end end)
 	end
+
 	infected.AI_Director = self
 	infected.EntitiesToNoCollide = {}
-	for _,v in pairs(self.Infected) do
-		table_insert(infected.EntitiesToNoCollide,v.class)
+	for _, v in pairs(self.Infected) do
+		table_insert(infected.EntitiesToNoCollide, v.class)
 	end
-	for _,v in pairs(self.SpecialInfected) do
-		table_insert(infected.EntitiesToNoCollide,v.class)
+
+	for _, v in pairs(self.SpecialInfected) do
+		table_insert(infected.EntitiesToNoCollide, v.class)
 	end
 end
 
-function ENT:SpawnSpecialInfected(ent,pos)
+function ENT:SpawnSpecialInfected(ent, pos)
 	if ent == false then return end
 	if pos == nil or pos == false then return end
 	if #self.tbl_SpawnedSpecialInfected >= self.MaxSpecialInfected then return end
-
 	local infected = ents.Create(ent)
 	infected:SetPos(pos)
-	infected:SetAngles(Angle(0,math.random(0,360),0))
+	infected:SetAngles(Angle(0, math.random(0, 360), 0))
 	infected:Spawn()
 	infected:SetGhost(true)
 	infected.SightAngle = 360
 	infected.EnemyXRayDetection = true
-	table_insert(self.tbl_SpawnedSpecialInfected,infected)
+	table_insert(self.tbl_SpawnedSpecialInfected, infected)
 	infected.AI_Director = self
 	infected.EntitiesToNoCollide = {}
-	for _,v in pairs(self.Infected) do
-		table_insert(infected.EntitiesToNoCollide,v.class)
+	for _, v in pairs(self.Infected) do
+		table_insert(infected.EntitiesToNoCollide, v.class)
 	end
 end
 
 function ENT:SpawnBossInfected(pos)
 	if pos == nil or pos == false then return end
 	if #self.tbl_SpawnedBossSpecialInfected >= 3 then return end
-
 	local ent = "npc_vj_l4d2_witch"
-	if math.random(1,5) == 1 then
-		ent = "npc_vj_l4d2_tank"
-	end
+	if math.random(1, 5) == 1 then ent = "npc_vj_l4d2_tank" end
 	local infected = ents.Create(ent)
 	infected:SetPos(pos)
-	infected:SetAngles(Angle(0,math.random(0,360),0))
+	infected:SetAngles(Angle(0, math.random(0, 360), 0))
 	infected:Spawn()
-	table_insert(self.tbl_SpawnedBossSpecialInfected,infected)
+	table_insert(self.tbl_SpawnedBossSpecialInfected, infected)
 	infected.AI_Director = self
 	infected.EntitiesToNoCollide = {}
-	for _,v in pairs(self.Infected) do
-		table_insert(infected.EntitiesToNoCollide,v.class)
+	for _, v in pairs(self.Infected) do
+		table_insert(infected.EntitiesToNoCollide, v.class)
 	end
 end
 
 function ENT:OnRemove()
 	self:DoMusic(true)
-	for index,object in ipairs(self.tbl_SpawnedNPCs) do
-		if IsValid(object) then
-			object:Remove()
-		end
+	for _, object in ipairs(self.tbl_SpawnedNPCs) do
+		if IsValid(object) then object:Remove() end
 	end
-	for index,object in ipairs(self.tbl_SpawnedSpecialInfected) do
-		if IsValid(object) then
-			object:Remove()
-		end
+
+	for _, object in ipairs(self.tbl_SpawnedSpecialInfected) do
+		if IsValid(object) then object:Remove() end
 	end
-	for index,object in ipairs(self.tbl_SpawnedBossSpecialInfected) do
-		if IsValid(object) then
-			object:Remove()
-		end
+
+	for _, object in ipairs(self.tbl_SpawnedBossSpecialInfected) do
+		if IsValid(object) then object:Remove() end
 	end
 end
