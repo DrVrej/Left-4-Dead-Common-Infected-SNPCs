@@ -35,10 +35,12 @@ ENT.FuseTime = 7
 ENT.Zombies = {}
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:Init()
+	local myPos = self:GetPos()
+	local curTime = CurTime()
 	self:SetHealth(1)
-	for _, v in pairs(ents.FindInSphere(self:GetPos(), 4000)) do
-		if v:IsNPC() && v.IsVJL4DCommonInfected && v.Zombie_CanHearPipe && v.Zombie_NextPipBombT < CurTime() then
-			v.Zombie_NextPipBombT = CurTime() + 6.9
+	for _, v in pairs(ents.FindInSphere(myPos, 4000)) do
+		if v:IsNPC() && v.IsVJL4DCommonInfected && v.Zombie_CanHearPipe && v.Zombie_NextPipBombT < curTime then
+			v.Zombie_NextPipBombT = curTime + 6.9
 			v:ForceSetEnemy(self, true)
 			table.insert(self.Zombies, v)
 		end
@@ -72,7 +74,7 @@ function ENT:Init()
 	glowFuse:SetKeyValue("rendermode", "5")
 	glowFuse:SetKeyValue("rendercolor", "255 191 0")
 	glowFuse:SetKeyValue("spawnflags", "1")
-	glowFuse:SetPos(self:GetPos())
+	glowFuse:SetPos(myPos)
 	glowFuse:SetParent(self)
 	glowFuse:Spawn()
 	glowFuse:Activate()
@@ -100,13 +102,13 @@ function ENT:Init()
 	local redLight = ents.Create("light_dynamic")
 	redLight:SetKeyValue("brightness", "0.5")
 	redLight:SetKeyValue("distance", "35")
-	redLight:SetLocalPos(self:GetPos())
+	redLight:SetLocalPos(myPos)
 	redLight:SetLocalAngles(self:GetAngles())
 	redLight:Fire("Color", "255 50 0")
 	redLight:SetParent(self)
 	redLight:Spawn()
 	redLight:Activate()
-	redLight:Fire("TurnOn", "", 0)
+	redLight:Fire("TurnOn")
 	redLight:Fire("SetParentAttachment", "fuse")
 	self:DeleteOnRemove(redLight)
 end
@@ -153,7 +155,6 @@ function ENT:OnCollision(data, phys)
 	if curVelSpeed > 500 then -- Or else it will go flying!
 		phys:SetVelocity(getVel * 1.2)
 	end
-	
 	if curVelSpeed > 100 then -- If the grenade is going faster than 100, then play the touch sound
 		self:PlaySound("OnCollide")
 	end
@@ -163,13 +164,14 @@ local defAng = Angle()
 local posUp100 = Vector(0, 0, 100)
 --
 function ENT:OnDestroy()
-	util.ScreenShake(self:GetPos(), 100, 200, 1, 2500)
-	util.BlastDamage(self, self:GetOwner() == NULL and self or self:GetOwner(), self:GetPos(), 450, 150)
-	
+	local myPos = self:GetPos()
+	util.ScreenShake(myPos, 100, 200, 1, 2500)
+	util.BlastDamage(self, self:GetOwner() == NULL and self or self:GetOwner(), myPos, 450, 150)
+
 	-- Particles & Effects
-	ParticleEffect("vj_explosion2", self:GetPos(), defAng, nil)
+	ParticleEffect("vj_explosion2", myPos, defAng, nil)
 	local effectData = EffectData()
-	effectData:SetOrigin(self:GetPos())
+	effectData:SetOrigin(myPos)
 	util.Effect("ThumperDust", effectData)
 	util.Effect("Explosion", effectData)
 
@@ -177,23 +179,23 @@ function ENT:OnDestroy()
 	local expLight = ents.Create("light_dynamic")
 	expLight:SetKeyValue("brightness", "4")
 	expLight:SetKeyValue("distance", "300")
-	expLight:SetLocalPos(self:GetPos())
+	expLight:SetLocalPos(myPos)
 	expLight:SetLocalAngles(self:GetAngles())
 	expLight:Fire("Color", "255 150 0")
 	expLight:SetParent(self)
 	expLight:Spawn()
 	expLight:Activate()
-	expLight:Fire("TurnOn", "", 0)
+	expLight:Fire("TurnOn")
 	self:DeleteOnRemove(expLight)
 	
 	-- Decal
-	self:SetLocalPos(Vector(self:GetPos().x, self:GetPos().y, self:GetPos().z +4)) -- Because the entity is too close to the ground
+	self:SetLocalPos(Vector(myPos.x, myPos.y, myPos.z + 4)) -- Because the entity is too close to the ground
 	local tr = util.TraceLine({
-		start = self:GetPos(),
-		endpos = self:GetPos() - posUp100,
+		start = myPos,
+		endpos = myPos - posUp100,
 		filter = self
 	})
-	util.Decal(VJ.PICK(self.CollisionDecal), tr.HitPos+tr.HitNormal, tr.HitPos-tr.HitNormal)
+	util.Decal(VJ.PICK(self.CollisionDecal), tr.HitPos+tr.HitNormal, tr.HitPos - tr.HitNormal)
 	
 	-- Misc
 	self:EmitSound(VJ.PICK(sdExplosion), 90, 100)
