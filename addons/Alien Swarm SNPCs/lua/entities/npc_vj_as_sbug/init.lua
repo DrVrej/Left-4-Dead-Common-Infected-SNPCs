@@ -103,22 +103,22 @@ function ENT:Controller_Initialize(ply, controlEnt)
 	end
 	
 	function controlEnt:OnKeyBindPressed(key)
-		local npc = self.VJCE_NPC
+		local npc = self:GetNPC()
 		-- Toggle defending mode
 		if key == IN_JUMP then
 			if !npc.Shieldbug_Defending then
 				npc.Shieldbug_Defending = true
-				self.VJCE_Player:ChatPrint("Entering defense mode")
+				self:GetPlayer():ChatPrint("Entering defense mode")
 			else
 				npc.Shieldbug_Defending = false
-				self.VJCE_Player:ChatPrint("Exiting defense mode")
+				self:GetPlayer():ChatPrint("Exiting defense mode")
 			end
 		end
 	end
 	
 	-- Revert the NPC's "TranslateActivity" to the original function
 	function controlEnt:OnStopControlling(keyPressed)
-		local npc = self.VJCE_NPC
+		local npc = self:GetNPC()
 		if IsValid(npc) then
 			npc.TranslateActivity = self.OriginalShieldbugFunc
 		end

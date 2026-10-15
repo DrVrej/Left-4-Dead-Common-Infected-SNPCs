@@ -47,13 +47,13 @@ function ENT:Controller_Initialize(ply, controlEnt)
 	
 	function controlEnt:OnKeyBindPressed(key)
 		if key == IN_JUMP then
-			local npc = self.VJCE_NPC
+			local npc = self:GetNPC()
 			if !npc:IsOnFire() then
 				npc:Ignite(99999)
-				self.VJCE_Player:PrintMessage(HUD_PRINTCENTER, "Igniting!")
+				self:GetPlayer():PrintMessage(HUD_PRINTCENTER, "Igniting!")
 			else
 				npc:Extinguish()
-				self.VJCE_Player:PrintMessage(HUD_PRINTCENTER, "Extinguishing!")
+				self:GetPlayer():PrintMessage(HUD_PRINTCENTER, "Extinguishing!")
 			end
 		end
 	end
