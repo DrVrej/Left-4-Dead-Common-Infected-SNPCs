@@ -73,7 +73,7 @@ function ENT:OnInput(key, activator, caller, data)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnAlert(ent)
-	if self.VJ_IsBeingControlled then return end
+	if self.VJ_Controlled then return end
 	if math.random(1, 2) == 1 then
 		self:PlayAnim(ACT_ARM, true, false, true)
 		self:PlaySoundSystem("Alert", "vj_alienswarm/shieldbug/roar.wav")

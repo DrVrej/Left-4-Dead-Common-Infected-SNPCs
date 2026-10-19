@@ -144,15 +144,15 @@ function ENT:BMSASSASSIN_DOCLOAK()
 		end
 		curWep:SetDrawWorldModel(false)
 	end
-	if self.VJ_IsBeingControlled == false then
+	if !self.VJ_Controlled then
 		timer.Simple(math.random(6, 9), function() if IsValid(self) then self:BMSASSASSIN_RESETCLOAK() end end)
 	end
 	self.Assassin_NextCloakT = CurTime() + math.random(13, 14)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnThinkActive()
-	if self.VJ_IsBeingControlled && self.VJ_TheController:KeyDown(IN_JUMP) then
-		self.VJ_TheController:PrintMessage(HUD_PRINTCENTER, "Changing Camouflage!")
+	if self.VJ_Controlled && self.VJ_Controller:GetPlayer():KeyDown(IN_JUMP) then
+		self.VJ_Controller:GetPlayer():PrintMessage(HUD_PRINTCENTER, "Changing Camouflage!")
 		if self.Assassin_ControllerCloakLevel == 0 then
 			self.Assassin_ControllerCloakLevel = 1
 			self:BMSASSASSIN_DOCLOAK()
@@ -161,7 +161,7 @@ function ENT:OnThinkActive()
 			self:BMSASSASSIN_RESETCLOAK()
 		end
 	end
-	if !self.VJ_IsBeingControlled then
+	if !self.VJ_Controlled then
 		if GetConVarNumber("vj_bms_blackopsassassin_cloak") == 1 then
 			if IsValid(self:GetEnemy()) then
 				if CurTime() > self.Assassin_NextCloakT then

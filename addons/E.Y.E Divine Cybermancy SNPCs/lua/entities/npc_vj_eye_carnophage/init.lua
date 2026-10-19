@@ -64,7 +64,7 @@ function ENT:OnAnimEvent(ev, evTime, evCycle, evType, evOptions)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnAlert(ent)
-	if self.VJ_IsBeingControlled then return end
+	if self.VJ_Controlled then return end
 	if math.random(1, 2) == 1 then
 		self.SoundTbl_Alert = sdAlertAngry
 		self:PlayAnim(ACT_ARM, true, false, true)

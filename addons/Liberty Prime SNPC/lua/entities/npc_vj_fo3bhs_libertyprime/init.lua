@@ -148,7 +148,7 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnThinkAttack(isAttacking, enemy)
 	if isAttacking then return end
-	if self.EnemyData.Distance > 600 && CurTime() > self.LibertyPrime_NextNukeAttackT && ((!self.VJ_IsBeingControlled) or (self.VJ_IsBeingControlled && self.VJ_TheController:KeyDown(IN_JUMP))) then
+	if self.EnemyData.Distance > 600 && CurTime() > self.LibertyPrime_NextNukeAttackT && ((!self.VJ_Controlled) or (self.VJ_Controlled && self.VJ_Controller:GetPlayer():KeyDown(IN_JUMP))) then
 		self.LibertyPrime_DoingNukeAttack = true
 		self.RangeAttackProjectiles = "obj_fo3_libertymininuke"
 		self.RangeAttackMaxDistance = 2700

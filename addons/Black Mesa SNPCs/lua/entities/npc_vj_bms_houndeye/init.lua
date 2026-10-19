@@ -71,7 +71,7 @@ function ENT:TranslateActivity(act)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnAlert(ent)
-	if self.VJ_IsBeingControlled then return end
+	if self.VJ_Controlled then return end
 	self:PlayAnim(animAlert, true, 1, true)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

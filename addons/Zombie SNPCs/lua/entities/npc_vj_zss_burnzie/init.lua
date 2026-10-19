@@ -72,7 +72,7 @@ end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnStateChange(oldState, newState)
 	-- Set fire when its been alerted or seen an enemy
-	if !self.VJ_IsBeingControlled then
+	if !self.VJ_Controlled then
 		if newState == NPC_STATE_ALERT or newState == NPC_STATE_COMBAT then
 			self:Ignite(99999)
 		else

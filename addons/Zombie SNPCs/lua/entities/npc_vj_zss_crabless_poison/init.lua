@@ -60,6 +60,6 @@ function ENT:OnAnimEvent(ev, evTime, evCycle, evType, evOptions)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnAlert(ent)
-	if self.VJ_IsBeingControlled then return end
+	if self.VJ_Controlled then return end
 	self:PlayAnim("throwwarning", true, false, true)
 end

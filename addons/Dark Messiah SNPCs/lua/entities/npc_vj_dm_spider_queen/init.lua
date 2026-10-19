@@ -120,7 +120,7 @@ function ENT:OnFootstepSound(moveType, sdFile)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnThinkActive()
-	if self.SpiderQ_AllowSpawning && IsValid(self:GetEnemy()) && CurTime() > self.SpiderQ_NextBirthT && ((!self.VJ_IsBeingControlled) or (self.VJ_IsBeingControlled && self.VJ_TheController:KeyDown(IN_JUMP))) then
+	if self.SpiderQ_AllowSpawning && IsValid(self:GetEnemy()) && CurTime() > self.SpiderQ_NextBirthT && ((!self.VJ_Controlled) or (self.VJ_Controlled && self.VJ_Controller:GetPlayer():KeyDown(IN_JUMP))) then
 		local babyTbl = self.SpiderQ_BabySpidersTbl
 		for k, v in pairs(babyTbl) do
 			if !IsValid(v) then table.remove(babyTbl, k) continue end
@@ -128,8 +128,8 @@ function ENT:OnThinkActive()
 		babyTbl = self.SpiderQ_BabySpidersTbl
 		if (#babyTbl % 3 == 0) && #babyTbl < self.SpiderQ_SpiderLimit then
 			local myPos = self:GetPos()
-			if self.VJ_IsBeingControlled then
-				self.VJ_TheController:PrintMessage(HUD_PRINTCENTER, "Spawning Spiders! Cooldown: " .. self.SpiderQ_NextBirthTime .. " seconds!")
+			if self.VJ_Controlled then
+				self.VJ_Controller:GetPlayer():PrintMessage(HUD_PRINTCENTER, "Spawning Spiders! Cooldown: " .. self.SpiderQ_NextBirthTime .. " seconds!")
 			end
 			util.ScreenShake(myPos, 100, 200, 5, 3000)
 			VJ.EmitSound(self, sdSpawnBabies, 100, math.random(80, 100))
@@ -153,7 +153,7 @@ function ENT:OnThinkActive()
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:OnAlert(ent)
-	if self.VJ_IsBeingControlled then return end
+	if self.VJ_Controlled then return end
 	self:PlayAnim(ACT_IDLE_ANGRY, true, false, true)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------

@@ -91,9 +91,9 @@ end
 function ENT:OnThinkActive()
 	-- Pull out the grenade
 	if !self.Zombie_GrenadeOut then
-		if self.VJ_IsBeingControlled then
-			if self.VJ_TheController:KeyDown(IN_JUMP) then
-				self.VJ_TheController:PrintMessage(HUD_PRINTCENTER, "Pulling Grenade Out!")
+		if self.VJ_Controlled then
+			if self.VJ_Controller:GetPlayer():KeyDown(IN_JUMP) then
+				self.VJ_Controller:GetPlayer():PrintMessage(HUD_PRINTCENTER, "Pulling Grenade Out!")
 				self:Zombie_CreateGrenade()
 			end
 		elseif IsValid(self:GetEnemy()) && self.EnemyData.Distance <= 256 && self:Health() <= 40 then

@@ -97,7 +97,7 @@ function ENT:Controller_Initialize(ply, controlEnt)
 end
 ---------------------------------------------------------------------------------------------------------------------------------------------
 function ENT:TranslateActivity(act)
-	if act == ACT_RUN && ((!self.VJ_IsBeingControlled && self.EnemyData.Distance < 800 && (self:GetNPCState() == NPC_STATE_ALERT or self:GetNPCState() == NPC_STATE_COMBAT)) or (self.VJ_IsBeingControlled && self.Boomer_ControllerGallop)) then
+	if act == ACT_RUN && ((!self.VJ_Controlled && self.EnemyData.Distance < 800 && (self:GetNPCState() == NPC_STATE_ALERT or self:GetNPCState() == NPC_STATE_COMBAT)) or (self.VJ_Controlled && self.Boomer_ControllerGallop)) then
 		return self.Boomer_AnimGallop
 	end
 	return self.BaseClass.TranslateActivity(self, act)
